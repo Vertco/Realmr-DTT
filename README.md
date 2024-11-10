@@ -15,7 +15,8 @@
  It has built-in multi-monitor support so that the GM can manipulate the player's view without breaking the emmersion for the players.
 
  For now, the VTT has no support for any of the more advanced options like custom lighting, character management and such, but these tools might be added in the future.
- As the software is still in pre-release many things can still change, and as I'm actively using the tool in my current campaign features will be added and updated as needed.
+ As the software is still in pre-release many things can still change, and as I'm actively using the tool in my current campaign features will be added and updated as needed.<br/>
+ [Read the wiki](https://github.com/Vertco/Realm-Renderer/wiki) to learn how to use Realm Renderer.
 
  # Currently implemented:
 - [x] Multi-monitor Player's view with Player's desk:
