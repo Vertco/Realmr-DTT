@@ -24,7 +24,7 @@
 - [X] Basic image support
 
 # Planned features:
-- [ ] https://github.com/Vertco/realm-renderer/issues/2
-- [ ] https://github.com/Vertco/realm-renderer/issues/4
-- [ ] https://github.com/Vertco/realm-renderer/issues/3
-- [ ] https://github.com/Vertco/realm-renderer/issues/5
+- [ ] [Campaign mangement](https://github.com/Vertco/realm-renderer/issues/2)
+- [ ] [Audio support](https://github.com/Vertco/realm-renderer/issues/4)
+- [ ] [Animated images support](https://github.com/Vertco/realm-renderer/issues/3)
+- [ ] [Markdown notes](https://github.com/Vertco/realm-renderer/issues/5)
