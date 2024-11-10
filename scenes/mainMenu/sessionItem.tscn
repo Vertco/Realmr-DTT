@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://7r8eslfi2ybx"]
+
+[ext_resource type="Script" path="res://scenes/mainMenu/sessionItem.gd" id="1_dreo4"]
+[ext_resource type="Texture2D" uid="uid://d1rql44soqs4m" path="res://media/images/RealmRendererLogo.svg" id="2_tvtod"]
+[ext_resource type="LabelSettings" uid="uid://drsgn7q2feum" path="res://media/subtext.tres" id="3_207pr"]
+[ext_resource type="Texture2D" uid="uid://dvsquse84r6ts" path="res://media/icons/folderOpen.svg" id="4_f4lg7"]
+
+[node name="sessionItem" type="Panel"]
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+visibility_layer = 1025
+custom_minimum_size = Vector2(460, 96)
+offset_right = 487.0
+offset_bottom = 96.0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_dreo4")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visibility_layer = 1025
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+visibility_layer = 1025
+layout_mode = 2
+
+[node name="screenshot" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 1025
+custom_minimum_size = Vector2(86, 86)
+layout_mode = 2
+texture = ExtResource("2_tvtod")
+expand_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 1025
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="sessionName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visibility_layer = 1025
+layout_mode = 2
+text = "Session name"
+
+[node name="lastModified" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visibility_layer = 1025
+layout_mode = 2
+size_flags_vertical = 10
+text = "Last modified"
+label_settings = ExtResource("3_207pr")
+
+[node name="path" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visibility_layer = 1025
+layout_mode = 2
+size_flags_vertical = 8
+text = "Path\\folder\\folder\\file"
+label_settings = ExtResource("3_207pr")
+text_overrun_behavior = 3
+
+[node name="folderButton" type="Button" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 1025
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Show session files"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+icon = ExtResource("4_f4lg7")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/folderButton" to="." method="_on_folderButton_pressed"]
