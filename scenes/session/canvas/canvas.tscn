@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2xbpwxg7od2m"]
+[gd_scene load_steps=17 format=3 uid="uid://c2xbpwxg7od2m"]
 
 [ext_resource type="Script" path="res://scenes/session/canvas/canvas.gd" id="1_qqk25"]
 [ext_resource type="Script" path="res://scenes/session/canvas/gridRenderer.gd" id="2_dclsh"]
@@ -15,10 +15,6 @@ draw_center = false
 border_color = Color(1, 1, 1, 0.75)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c774q"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mknsl"]
-draw_center = false
-border_color = Color(1, 1, 1, 0.75)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8atq"]
 
@@ -112,7 +108,7 @@ script = ExtResource("3_dy7o5")
 [node name="CanvasLayer" type="CanvasLayer" parent="gmCam"]
 follow_viewport_enabled = true
 
-[node name="playersCamControl" type="Panel" parent="gmCam/CanvasLayer" node_paths=PackedStringArray("playersWindow", "playersCam", "gmCam")]
+[node name="playersCamControl" type="Panel" parent="gmCam/CanvasLayer" node_paths=PackedStringArray("playersWindow")]
 unique_name_in_owner = true
 visibility_layer = 1024
 anchors_preset = 8
@@ -130,9 +126,6 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_c774q")
 script = ExtResource("5_b3mp6")
 playersWindow = NodePath("../../../playersWindow")
-playersCam = NodePath("../../../playersWindow/playersCam")
-gmCam = NodePath("../..")
-passepartout = SubResource("StyleBoxFlat_mknsl")
 
 [node name="passepartoutController" type="MarginContainer" parent="gmCam/CanvasLayer/playersCamControl"]
 visibility_layer = 1024

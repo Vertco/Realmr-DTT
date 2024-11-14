@@ -26,8 +26,10 @@ var session:String:
 		session = value
 		path = "user://sessions/"+session
 		assetsRoot = "user://sessions/"+session+"/assets"
+		filePath = "user://sessions/"+session+"/"+session+".rrmap"
 var path:String
 var assetsRoot:String
+var filePath:String
 var activeLayer:int = 4:
 	set(value):
 		activeLayer = value
@@ -61,4 +63,24 @@ func save() -> void:
 		var jsonString = JSON.stringify(nodeData)
 		# Store the save dictionary as a new line in the save file.
 		saveGame.store_line(jsonString)
+
+func saveV2() -> void:
+	var file := FileAccess.open(filePath, FileAccess.WRITE)
+	var saveData := {
+		"version": ProjectSettings.get_setting("application/config/version"),
+		"nodes": []  # Initialize an empty array for nodes
+	}
+	var saveNodes := get_tree().get_nodes_in_group("saveWithSession")
+	for node in saveNodes:
+		if node.scene_file_path.is_empty():
+			print("Savable node " + node.name + " is not an instanced scene, skipped")
+			continue
+		if !node.has_method("save"):
+			print("Savable node " + node.name + " is missing a saveData() function, skipped saving")
+			continue
+		var nodeData = node.call("save")
+		saveData["nodes"].append(nodeData)  # Append node data to the nodes array in saveData
+	var metaString = JSON.stringify(saveData)
+	file.store_line(metaString)
+	file.close()  # Close the file after writing
 #endregion

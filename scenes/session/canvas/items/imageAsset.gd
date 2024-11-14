@@ -76,6 +76,9 @@ func snap_to_grid(pos: Vector2) -> Vector2:
 		round(pos.y / 50) * 50
 	)
 
+func update() -> void:
+	initiated = true
+
 func save() -> Dictionary:
 	var saveDict:Dictionary = {
 		"filename" : get_scene_file_path(),

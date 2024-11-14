@@ -1,9 +1,7 @@
 extends Control
 
 @export var playersWindow:Window
-@export var playersCam:Camera2D
-@export var gmCam:Camera2D
-@export var passepartout:StyleBoxFlat = StyleBoxFlat.new()
+@export var playersDesk:StyleBoxFlat = StyleBoxFlat.new()
 
 var _dragging:bool = false
 var initiated:bool = false
@@ -11,8 +9,7 @@ var initiated:bool = false
 func _ready():
 	%header.connect("gui_input", Callable(self, "on_header_input"))
 	playersWindow.connect("size_changed", Callable(self, "on_playersCam_changed"))
-	gmCam.connect("zoomChanged", Callable(self, "on_playersCam_changed"))
-	playersCam.connect("item_rect_changed", Callable(self, "on_playersCam_changed"))
+	%playersCam.connect("item_rect_changed", Callable(self, "on_playersCam_changed"))
 	var picker:ColorPicker = %picker.get_picker()
 	picker.can_add_swatches = false
 	picker.presets_visible = false
@@ -24,14 +21,14 @@ func _ready():
 	initiated = true
 
 func updatePassepartoutWidth(value:float) -> void:
-	var widthIncrement = %passepartout.size.x/200
+	var widthIncrement = %playersDesk.size.x/200
 	var width = widthIncrement*value
 	%passepartoutLeft.value = value
 	%passepartoutRight.value = value
-	%passepartout.remove_theme_stylebox_override("panel")
-	passepartout.border_width_left = width
-	passepartout.border_width_right = width
-	%passepartout.add_theme_stylebox_override("panel", passepartout)
+	%playersDesk.remove_theme_stylebox_override("panel")
+	playersDesk.border_width_left = width
+	playersDesk.border_width_right = width
+	%playersDesk.add_theme_stylebox_override("panel", playersDesk)
 
 func hideControls() -> void:
 	%yScale.visible = false
@@ -47,13 +44,13 @@ func on_header_input(event):
 	elif event is InputEventMouseMotion:
 		if _dragging:
 			global_position += event.relative
-			playersCam.global_position += event.relative
+			%playersCam.global_position += event.relative
 			hideControls()
 
 func on_playersCam_changed():
-	size = Vector2(playersWindow.get_visible_rect().size) / playersCam.zoom
+	size = Vector2(playersWindow.get_visible_rect().size) / %playersCam.zoom
 	var positionOffset := Vector2(size.x/2,size.y/2)
-	position = playersCam.position - positionOffset
+	position = %playersCam.position - positionOffset
 	updatePassepartoutWidth(root.settings.passepartout)
 
 func _on_editButton_pressed() -> void:
@@ -64,8 +61,8 @@ func _on_editButton_pressed() -> void:
 		%passepartoutSliderR.visible = false
 		%picker.visible = false
 	else:
-		%xScale.value = playersCam.zoom.x
-		%yScale.value = playersCam.zoom.y
+		%xScale.value = %playersCam.zoom.x
+		%yScale.value = %playersCam.zoom.y
 		%yScale.visible = true
 		%xScale.visible = true
 		%passepartoutSliderL.visible = true
@@ -74,8 +71,8 @@ func _on_editButton_pressed() -> void:
 
 func _on_scale_value_changed(value: float) -> void:
 	if initiated:
-		playersCam.zoom = Vector2(%xScale.value, %yScale.value)
-		root.saveSettings({playersView_x = playersCam.zoom.x, playersView_y = playersCam.zoom.y})
+		%playersCam.zoom = Vector2(%xScale.value, %yScale.value)
+		root.saveSettings({playersView_x = %playersCam.zoom.x, playersView_y = %playersCam.zoom.y})
 		on_playersCam_changed()
 
 func _on_passepartoutSliderL_value_changed(value: float) -> void:
@@ -96,10 +93,10 @@ func _on_picker_color_changed(color: Color) -> void:
 	theme.bg_color = color
 	%passepartoutLeft.add_theme_stylebox_override("fill", theme)
 	%passepartoutRight.add_theme_stylebox_override("fill", theme)
-	%passepartout.remove_theme_stylebox_override("panel")
-	passepartout.draw_center = false
-	passepartout.border_color = color
-	%passepartout.add_theme_stylebox_override("panel", passepartout)
+	%playersDesk.remove_theme_stylebox_override("panel")
+	playersDesk.draw_center = false
+	playersDesk.border_color = color
+	%playersDesk.add_theme_stylebox_override("panel", playersDesk)
 
 func _on_picker_popup_closed() -> void:
 	root.saveSettings({passepartoutColor = %picker.color.to_html()})

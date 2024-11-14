@@ -10,6 +10,7 @@ var currentPath:String
 
 #region functions
 func _ready() -> void:
+	session.connect("loadSession", updateTree)
 	# Setup the vertical scroll bar for asset container
 	var scrollBar:VScrollBar = %assetContainer.get_v_scroll_bar()
 	scrollBar.set_visibility_layer_bit(0, false)
@@ -79,7 +80,7 @@ func listAssets(selected_item:TreeItem) -> void:
 
 	for asset in assets:
 		# Skip certain files based on extension
-		if asset.get_extension() == "import" or asset.get_extension() == "preview":
+		if asset.get_extension() == "import" or asset.get_extension() == "preview" or asset.get_extension() == "rrmap":
 			continue
 		# Instantiate file item and populate metadata
 		var instance = fileItem.instantiate()

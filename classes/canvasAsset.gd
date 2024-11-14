@@ -10,6 +10,7 @@ signal playerVis_changed(playerVis:bool)
 @warning_ignore("unused_signal")
 signal file_changed(file:String)
 
+var initiated:bool = false
 @export var selected:bool:
 	set(value):
 		for node in get_tree().get_nodes_in_group("selected"):
@@ -20,7 +21,8 @@ signal file_changed(file:String)
 			add_to_group("selected")
 		else:
 			remove_from_group("selected")
-		session.emit_signal("updateOutlinerItem", get_index(true))
+		if initiated:
+			session.emit_signal("updateOutlinerItem", get_index(true))
 		emit_signal("selection_changed", value)
 @export var locked:bool:
 	set(value):
@@ -28,7 +30,8 @@ signal file_changed(file:String)
 		if locked:
 			selected = false
 		emit_signal("lock_changed", locked)
-		session.emit_signal("updateOutlinerItem", get_index(true))
+		if initiated:
+			session.emit_signal("updateOutlinerItem", get_index(true))
 @export var playerVis:bool = true:
 	set(value):
 		playerVis = value

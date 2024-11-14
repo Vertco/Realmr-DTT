@@ -13,17 +13,17 @@ func _ready() -> void:
 	scrollbar.set_visibility_layer_bit(10, true)
 
 func updateItem(index:int) -> void:
-	var itemV2 = %outlinerTree.get_child(index)
-	itemV2.update()
+	var item = %outlinerTree.get_child(index)
+	item.update()
 
 func updateTree(nodes:Array) -> void:
 	for child in %outlinerTree.get_children():
 		child.queue_free()
 	for node in nodes:
 		if node.layer == session.activeLayer and root:
-			var itemV2 = outlinerItem.instantiate()
-			itemV2.node = node
-			%outlinerTree.add_child(itemV2)
+			var item = outlinerItem.instantiate()
+			item.node = node
+			%outlinerTree.add_child(item)
 
 func _on_outlinerTree_multi_selected(item:TreeItem, column:int, selected:bool) -> void:
 	item.get_metadata(column).selected = selected

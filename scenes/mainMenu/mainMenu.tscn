@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3a6itpc2glm7"]
+[gd_scene load_steps=14 format=3 uid="uid://b3a6itpc2glm7"]
 
 [ext_resource type="Script" path="res://scenes/mainMenu/mainMenu.gd" id="1_kicl8"]
 [ext_resource type="Texture2D" uid="uid://b82yxfkv2mj4o" path="res://media/images/egnoroth_coast.webp" id="1_nxp2n"]
@@ -8,10 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cs3fjjiritnke" path="res://media/icons/delete.svg" id="4_honq5"]
 [ext_resource type="Texture2D" uid="uid://dt3bspbajascj" path="res://media/icons/quit.svg" id="5_m0rwh"]
 [ext_resource type="Shader" path="res://media/shaders/menuBlur.gdshader" id="8_xc0cx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s6ir"]
-draw_center = false
-border_color = Color(1, 1, 1, 0.75)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npnre"]
 bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
@@ -62,44 +58,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kicl8")
-
-[node name="playersWindow" type="Window" parent="."]
-unique_name_in_owner = true
-auto_translate_mode = 1
-disable_3d = true
-canvas_cull_mask = 4294965248
-mode = 3
-title = "Player's view"
-size = Vector2i(1280, 720)
-visible = false
-unfocusable = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="playersWindow"]
-follow_viewport_enabled = true
-
-[node name="passepartout" type="Panel" parent="playersWindow/CanvasLayer"]
-unique_name_in_owner = true
-visibility_layer = 32768
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2s6ir")
-
-[node name="screensaver" type="TextureRect" parent="playersWindow/CanvasLayer"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-visibility_layer = 32768
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.169312
-offset_right = 0.169312
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_nxp2n")
-expand_mode = 3
-stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visibility_layer = 1025

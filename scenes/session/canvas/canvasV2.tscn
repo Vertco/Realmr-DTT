@@ -1,0 +1,345 @@
+[gd_scene load_steps=15 format=3 uid="uid://db53jvnnic75h"]
+
+[ext_resource type="Script" path="res://scenes/session/canvas/gridRenderer.gd" id="1_kituu"]
+[ext_resource type="Script" path="res://scenes/session/canvas/canvasV2.gd" id="1_qeh7x"]
+[ext_resource type="Script" path="res://scenes/session/canvas/playersCamControl.gd" id="3_e8f85"]
+[ext_resource type="PackedScene" uid="uid://boj7nc2xo44yc" path="res://scenes/session/ui/userInterface.tscn" id="3_hhr8n"]
+[ext_resource type="Texture2D" uid="uid://b82yxfkv2mj4o" path="res://media/images/egnoroth_coast.webp" id="3_recky"]
+[ext_resource type="Texture2D" uid="uid://b40rcpf2yfmkb" path="res://media/icons/empty.svg" id="4_pxycf"]
+[ext_resource type="Texture2D" uid="uid://b5kj627ygsn0d" path="res://media/icons/settings.svg" id="5_etk6t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0bnts"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tia2m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lncat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vppwu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqkow"]
+bg_color = Color(0, 0, 0, 0.74902)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7ept"]
+bg_color = Color(0, 0, 0, 0.74902)
+draw_center = false
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.74902)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ov18m"]
+draw_center = false
+border_color = Color(1, 1, 1, 0.75)
+
+[node name="canvasV2" type="Control"]
+visibility_layer = 1023
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qeh7x")
+
+[node name="canvasAssets" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="gridRenderer" type="Node2D" parent="."]
+visibility_layer = 526335
+z_index = 1
+script = ExtResource("1_kituu")
+
+[node name="canvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="playersCamControl" type="Panel" parent="canvasLayer" node_paths=PackedStringArray("playersWindow")]
+unique_name_in_owner = true
+visibility_layer = 1024
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0bnts")
+script = ExtResource("3_e8f85")
+playersWindow = NodePath("../../playersView")
+
+[node name="passepartoutController" type="MarginContainer" parent="canvasLayer/playersCamControl"]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="canvasLayer/playersCamControl/passepartoutController"]
+visibility_layer = 1024
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer"]
+visibility_layer = 1024
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="passepartoutLeft" type="ProgressBar" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control"]
+unique_name_in_owner = true
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+show_percentage = false
+
+[node name="passepartoutSliderL" type="HSlider" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 10
+theme_override_icons/grabber = ExtResource("4_pxycf")
+theme_override_icons/grabber_highlight = ExtResource("4_pxycf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_tia2m")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_lncat")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vppwu")
+step = 0.1
+scrollable = false
+
+[node name="Control2" type="Control" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer"]
+visibility_layer = 1024
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="passepartoutRight" type="ProgressBar" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control2"]
+unique_name_in_owner = true
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 1
+show_percentage = false
+
+[node name="passepartoutSliderR" type="HSlider" parent="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control2"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 10
+theme_override_icons/grabber = ExtResource("4_pxycf")
+theme_override_icons/grabber_highlight = ExtResource("4_pxycf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_tia2m")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_lncat")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vppwu")
+step = 0.1
+scrollable = false
+
+[node name="picker" type="ColorPickerButton" parent="canvasLayer/playersCamControl/passepartoutController"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+color = Color(1, 1, 1, 0.75)
+
+[node name="playersCamControl" type="VBoxContainer" parent="canvasLayer/playersCamControl"]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="header" type="Panel" parent="canvasLayer/playersCamControl/playersCamControl"]
+unique_name_in_owner = true
+light_mask = 1024
+visibility_layer = 1024
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_default_cursor_shape = 13
+theme_override_styles/panel = SubResource("StyleBoxFlat_yqkow")
+
+[node name="Label" type="Label" parent="canvasLayer/playersCamControl/playersCamControl/header"]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Player's view"
+
+[node name="editButton" type="Button" parent="canvasLayer/playersCamControl/playersCamControl/header"]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+icon = ExtResource("5_etk6t")
+flat = true
+
+[node name="Panel" type="Panel" parent="canvasLayer/playersCamControl/playersCamControl"]
+visibility_layer = 1024
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7ept")
+
+[node name="yScale" type="VSlider" parent="canvasLayer/playersCamControl"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+custom_minimum_size = Vector2(30, 240)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -120.0
+offset_right = 30.0
+offset_bottom = 120.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 9
+min_value = 0.1
+max_value = 4.0
+step = 0.05
+value = 1.0
+exp_edit = true
+
+[node name="xScale" type="HSlider" parent="canvasLayer/playersCamControl"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+custom_minimum_size = Vector2(240, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 10
+min_value = 0.1
+max_value = 4.0
+step = 0.05
+value = 1.0
+
+[node name="playersView" type="Window" parent="."]
+unique_name_in_owner = true
+disable_3d = true
+canvas_cull_mask = 4294476287
+mode = 3
+title = "Player's View"
+size = Vector2i(1280, 720)
+visible = false
+borderless = true
+always_on_top = true
+unfocusable = true
+
+[node name="playersCam" type="Camera2D" parent="playersView"]
+unique_name_in_owner = true
+
+[node name="canvasLayer" type="CanvasLayer" parent="playersView/playersCam"]
+follow_viewport_enabled = true
+
+[node name="playersDesk" type="Panel" parent="playersView/playersCam/canvasLayer"]
+unique_name_in_owner = true
+visibility_layer = 32768
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ov18m")
+
+[node name="screensaver" type="TextureRect" parent="playersView/playersCam/canvasLayer"]
+unique_name_in_owner = true
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+visibility_layer = 32768
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.169312
+offset_right = 0.169312
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_recky")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="gmCam" type="Camera2D" parent="."]
+unique_name_in_owner = true
+
+[node name="userInterface" parent="gmCam" instance=ExtResource("3_hhr8n")]
+
+[connection signal="child_order_changed" from="canvasAssets" to="." method="updateOutliner"]
+[connection signal="drag_ended" from="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control/passepartoutSliderL" to="canvasLayer/playersCamControl" method="_on_passepartoutSlider_drag_ended"]
+[connection signal="value_changed" from="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control/passepartoutSliderL" to="canvasLayer/playersCamControl" method="_on_passepartoutSliderL_value_changed"]
+[connection signal="drag_ended" from="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control2/passepartoutSliderR" to="canvasLayer/playersCamControl" method="_on_passepartoutSlider_drag_ended"]
+[connection signal="value_changed" from="canvasLayer/playersCamControl/passepartoutController/HBoxContainer/Control2/passepartoutSliderR" to="canvasLayer/playersCamControl" method="_on_passepartoutSliderR_value_changed"]
+[connection signal="color_changed" from="canvasLayer/playersCamControl/passepartoutController/picker" to="canvasLayer/playersCamControl" method="_on_picker_color_changed"]
+[connection signal="popup_closed" from="canvasLayer/playersCamControl/passepartoutController/picker" to="canvasLayer/playersCamControl" method="_on_picker_popup_closed"]
+[connection signal="pressed" from="canvasLayer/playersCamControl/playersCamControl/header/editButton" to="canvasLayer/playersCamControl" method="_on_editButton_pressed"]
+[connection signal="value_changed" from="canvasLayer/playersCamControl/yScale" to="canvasLayer/playersCamControl" method="_on_scale_value_changed"]
+[connection signal="value_changed" from="canvasLayer/playersCamControl/xScale" to="canvasLayer/playersCamControl" method="_on_scale_value_changed"]
