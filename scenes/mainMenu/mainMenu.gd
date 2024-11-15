@@ -34,7 +34,7 @@ func loadSessions() -> void:
 
 func openSession(s) -> void:
 	session.session = s
-	get_tree().change_scene_to_file("res://scenes/session/canvas/canvasV2.tscn")
+	get_tree().change_scene_to_file("res://scenes/session/canvas/canvas.tscn")
 
 func openSessionFolder(s) -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sessions/"+s+"/assets"))

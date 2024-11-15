@@ -39,7 +39,7 @@ var initiated:bool = false
 			modulate = "#ffffff"
 			updateLayer(layer)
 		else:
-			modulate = "ffffff20"
+			modulate = "ffffff40"
 			updateLayer(9)
 		emit_signal("playerVis_changed", playerVis)
 @export_range(0, 8) var layer:int:

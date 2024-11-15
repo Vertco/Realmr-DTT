@@ -26,13 +26,16 @@ var _hover:bool = false
 
 func _ready() -> void:
 	var modifiedTime:int = FileAccess.get_modified_time(globalPath + "/" + ses + ".rrmap")
-	var timeDict:Dictionary = Time.get_datetime_dict_from_unix_time(modifiedTime)
-	var timeString:String = "%02d-%02d-%02d %02d:%02d" % [
-		timeDict.day, timeDict.month, timeDict.year,
-		timeDict.hour, timeDict.minute
-	]
+	if modifiedTime:
+		var timeDict:Dictionary = Time.get_datetime_dict_from_unix_time(modifiedTime)
+		var timeString:String = "%02d-%02d-%02d %02d:%02d" % [
+			timeDict.day, timeDict.month, timeDict.year,
+			timeDict.hour, timeDict.minute
+		]
+		%lastModified.text = "Last modified: " + timeString
+	else:
+		%lastModified.text = "Last modified: Never"
 	%sessionName.text = ses
-	%lastModified.text = "Last modified: " + timeString
 	%path.text = globalPath
 	tooltip_text = "Select "+ses+" session"
 

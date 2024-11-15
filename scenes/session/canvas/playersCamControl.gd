@@ -9,6 +9,7 @@ var initiated:bool = false
 func _ready():
 	%header.connect("gui_input", Callable(self, "on_header_input"))
 	playersWindow.connect("size_changed", Callable(self, "on_playersCam_changed"))
+	get_window().connect("size_changed", Callable(self, "on_playersCam_changed"))
 	%playersCam.connect("item_rect_changed", Callable(self, "on_playersCam_changed"))
 	var picker:ColorPicker = %picker.get_picker()
 	picker.can_add_swatches = false
@@ -68,6 +69,9 @@ func _on_editButton_pressed() -> void:
 		%passepartoutSliderL.visible = true
 		%passepartoutSliderR.visible = true
 		%picker.visible = true
+
+func _on_visButton_pressed() -> void:
+	session.emit_signal("togglePlayersViewVis")
 
 func _on_scale_value_changed(value: float) -> void:
 	if initiated:
