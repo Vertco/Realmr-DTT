@@ -21,7 +21,7 @@ func _draw():
 	for line in lines:
 		draw_line(line["start"], line["end"], line["color"])
 
-func _update_grid():
+func updateGrid():
 	var gridColor := Color.html(root.settings.get("gridColor"))
 	for line in lines:
 		line["color"] = gridColor

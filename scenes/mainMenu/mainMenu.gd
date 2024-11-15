@@ -12,13 +12,6 @@ func _ready() -> void:
 	%versionLabel.text = "Version: "+ProjectSettings.get_setting("application/config/version")
 	loadSessions()
 	updateVisibleLayer()
-	if mainMenu.playersWindowOpen:
-		var windowPosition = DisplayServer.screen_get_size(mainMenu.playersWindowDisplay)/2
-		var globalPosition = windowPosition + DisplayServer.screen_get_position(mainMenu.playersWindowDisplay)
-		%playersWindow.set_position(globalPosition)
-		%playersWindow.visible = true
-	else:
-		%playersWindow.visible = false
 
 #region functions
 func updateVisibleLayer() -> void:
@@ -42,7 +35,6 @@ func loadSessions() -> void:
 func openSession(s) -> void:
 	session.session = s
 	get_tree().change_scene_to_file("res://scenes/session/canvas/canvas.tscn")
-	print("Opened session " + s)
 
 func openSessionFolder(s) -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sessions/"+s+"/assets"))

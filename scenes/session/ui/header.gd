@@ -1,23 +1,25 @@
 extends Control
 
 @onready var sessionMenu:PopupMenu = %session.get_popup()
+var openIcon := preload("res://media/icons/folderOpen.svg")
 var playersWindow:bool = false
 var openMenu = PopupMenu.new()
 
 #region functions
 func _ready() -> void:
 	sessionMenu.connect("id_pressed", _on_sessionItem_pressed)
-	#openMenu.connect("id_pressed", _on_openItem_pressed)
-	#var dir = DirAccess.open(root.settings.get("sessionsPath") + "/sessions")
-	#var sessions = dir.get_directories()
-	#for s in sessions:
-		#openMenu.add_item(s)
-	#sessionMenu.add_submenu_node_item("Open session",openMenu)
+	openMenu.connect("id_pressed", _on_openItem_pressed)
+	var dir = DirAccess.open(root.settings.get("sessionsPath") + "/sessions")
+	var sessions = dir.get_directories()
+	for s in sessions:
+		openMenu.add_item(s)
+	sessionMenu.add_submenu_node_item("Open session",openMenu,6)
+	sessionMenu.set_item_icon(6, openIcon)
 
 func _on_sessionItem_pressed(id) -> void:
 	match id:
 		0:
-			session.save()
+			session.saveV2()
 		1:
 			OS.shell_show_in_file_manager(ProjectSettings.globalize_path(session.assetsRoot))
 		2:
