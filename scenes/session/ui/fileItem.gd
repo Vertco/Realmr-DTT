@@ -3,6 +3,9 @@ extends Control
 @warning_ignore("unused_signal")
 signal deleteFile(file:String)
 
+const soundIcon := preload("res://media/icons/sound.svg")
+const noteIcon := preload("res://media/images/noteImageLarge.svg")
+
 @export var filePath:String:
 	set(value):
 		filePath = value
@@ -23,10 +26,9 @@ func update() -> void:
 		"image":
 			%filePreview.texture = _load_image()
 		"audio":
-			var image:= Image.new()
-			image.load("res://media/icons/sound.svg")
-			var texture:= ImageTexture.create_from_image(image)
-			%filePreview.texture = texture
+			%filePreview.texture = soundIcon
+		"note":
+			%filePreview.texture = noteIcon
 
 @warning_ignore("shadowed_variable")
 func _load_image() -> ImageTexture:

@@ -1,0 +1,168 @@
+[gd_scene load_steps=18 format=3 uid="uid://w8vsyinkbr5f"]
+
+[ext_resource type="Script" path="res://scenes/session/canvas/items/noteAsset.gd" id="1_4ah2r"]
+[ext_resource type="Texture2D" uid="uid://g0vp1yjcbi22" path="res://media/images/noteImage.svg" id="2_j86jb"]
+[ext_resource type="Script" path="res://addons/markdownlabel/markdownlabel.gd" id="3_yoq7l"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="4_j0urq"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="5_qswbg"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="6_la6ce"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_7cdlg"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_0ck3w"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_w214s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yywv1"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.188235, 0.188235, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng0no"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.188235, 0.188235, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Resource" id="Resource_isohq"]
+script = ExtResource("4_j0urq")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_5h8vo"]
+script = ExtResource("5_qswbg")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_3kshs"]
+script = ExtResource("6_la6ce")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_roghx"]
+script = ExtResource("7_7cdlg")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_7ognq"]
+script = ExtResource("8_0ck3w")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_x5bmy"]
+script = ExtResource("9_w214s")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[node name="noteAsset" type="Control" groups=["saveWithSession"]]
+visibility_layer = 1024
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_4ah2r")
+
+[node name="panel" type="Panel" parent="."]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yywv1")
+
+[node name="textureRect" type="TextureRect" parent="panel"]
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_j86jb")
+
+[node name="canvasLayer" type="CanvasLayer" parent="panel"]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="popup" type="RichTextLabel" parent="panel/canvasLayer"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_ng0no")
+bbcode_enabled = true
+threaded = true
+script = ExtResource("3_yoq7l")
+h1 = SubResource("Resource_isohq")
+h2 = SubResource("Resource_5h8vo")
+h3 = SubResource("Resource_3kshs")
+h4 = SubResource("Resource_roghx")
+h5 = SubResource("Resource_7ognq")
+h6 = SubResource("Resource_x5bmy")
+
+[connection signal="gui_input" from="panel" to="." method="_on_gui_input"]

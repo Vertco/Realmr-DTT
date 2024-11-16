@@ -54,6 +54,7 @@ saveWithSession="All nodes in this group will be saved to the session file and r
 
 theme/custom="res://media/theme.tres"
 theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 

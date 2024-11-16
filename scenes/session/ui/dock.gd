@@ -123,6 +123,8 @@ func listAssets(selected_item:TreeItem) -> void:
 					metadata.gridsize = PPS.get_string().to_int()
 			elif asset.get_extension() in ["mp3", "wav"]:
 				metadata.type = "audio"
+			elif asset.get_extension() in ["md", "txt"]:
+				metadata.type = "note"
 			else:
 				continue
 			var jsonString = JSON.stringify(metadata)
@@ -140,15 +142,21 @@ func uploadFiles(paths:PackedStringArray) -> void:
 	# Process uploaded files and save them as compressed images
 	for path in paths:
 		if path.get_extension() in ["png", "jpg", "jpeg", "webp"]:
-			var img = Image.new()
+			var img := Image.new()
 			img.load(path)
 			var newImg := Image.new()
 			newImg.copy_from(img)
-			var newImgPacked = newImg.save_webp_to_buffer()
+			var newImgPacked := newImg.save_webp_to_buffer()
 			var newImgPath:String = currentPath + "/" + path.get_file().get_basename() + ".webp"
 			var file = FileAccess.open(newImgPath, FileAccess.WRITE_READ)
 			file.store_buffer(newImgPacked)
 			file.close()
+		elif path.get_extension() in ["md", "txt"]:
+			var file := FileAccess.open(path, FileAccess.READ)
+			var content := file.get_as_text()
+			var newPath:String = currentPath + "/" + path.get_file()
+			var newFile := FileAccess.open(newPath, FileAccess.WRITE)
+			newFile.store_line(content)
 		else:
 			continue
 	# Refresh asset list after upload
