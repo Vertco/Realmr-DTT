@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8nxcydubdyxs"]
+[gd_scene load_steps=6 format=3 uid="uid://c8nxcydubdyxs"]
 
 [ext_resource type="Script" path="res://scenes/session/ui/outlinerItem.gd" id="1_62g1c"]
-[ext_resource type="Texture2D" uid="uid://f15d6nn128u3" path="res://media/icons/image.svg" id="1_df2pd"]
 [ext_resource type="LabelSettings" uid="uid://drsgn7q2feum" path="res://media/subtext.tres" id="2_3dioa"]
 [ext_resource type="Texture2D" uid="uid://bfq0m3g6qyv6c" path="res://media/icons/visible.svg" id="3_8fm4a"]
 [ext_resource type="Texture2D" uid="uid://bhh64vy84apvd" path="res://media/icons/unlocked.svg" id="4_sd38u"]
@@ -49,7 +48,6 @@ visibility_layer = 1024
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("1_df2pd")
 expand_mode = 2
 
 [node name="label" type="Label" parent="marginContainer/hBoxContainer"]

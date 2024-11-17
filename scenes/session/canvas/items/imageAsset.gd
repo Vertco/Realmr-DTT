@@ -1,5 +1,6 @@
-class_name ImageAsset
 extends CanvasAsset
+
+const type := "ImageAsset"
 
 var gridsize:int = 1:
 	set(value):

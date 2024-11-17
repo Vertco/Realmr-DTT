@@ -19,7 +19,7 @@ func _ready() -> void:
 func _on_sessionItem_pressed(id) -> void:
 	match id:
 		0:
-			session.saveV2()
+			session.save()
 		1:
 			OS.shell_show_in_file_manager(ProjectSettings.globalize_path(session.assetsRoot))
 		2:

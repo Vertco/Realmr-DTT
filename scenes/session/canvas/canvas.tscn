@@ -36,7 +36,7 @@ corner_radius_bottom_left = 5
 draw_center = false
 border_color = Color(1, 1, 1, 0.75)
 
-[node name="canvasV2" type="Control"]
+[node name="canvas" type="Control"]
 visibility_layer = 1023
 layout_mode = 3
 anchors_preset = 15
@@ -343,6 +343,7 @@ stretch_mode = 4
 
 [node name="gmCam" type="Camera2D" parent="."]
 unique_name_in_owner = true
+zoom = Vector2(0.54, 0.54)
 
 [node name="userInterface" parent="gmCam" instance=ExtResource("8_3fvvt")]
 

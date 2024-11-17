@@ -4,6 +4,7 @@ const lockedIcon:Texture2D = preload("res://media/icons/locked.svg")
 const outlinerItem = preload("res://scenes/session/ui/outlinerItem.tscn")
 
 var cache:Array[Node]
+var initiated:bool = false
 @onready var scrollbar = %outlinerContainer.get_v_scroll_bar()
 
 func _ready() -> void:
@@ -13,8 +14,10 @@ func _ready() -> void:
 	scrollbar.set_visibility_layer_bit(10, true)
 
 func updateItem(index:int) -> void:
-	var item = %outlinerTree.get_child(index)
-	item.update()
+	if initiated:
+		var item = %outlinerTree.get_child(index)
+		if item:
+			item.update()
 
 func updateTree(nodes:Array) -> void:
 	for child in %outlinerTree.get_children():
@@ -24,6 +27,7 @@ func updateTree(nodes:Array) -> void:
 			var item = outlinerItem.instantiate()
 			item.node = node
 			%outlinerTree.add_child(item)
+	initiated = true
 
 func _on_outlinerTree_multi_selected(item:TreeItem, column:int, selected:bool) -> void:
 	item.get_metadata(column).selected = selected

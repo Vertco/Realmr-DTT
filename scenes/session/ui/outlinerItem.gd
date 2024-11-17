@@ -2,12 +2,13 @@ extends Control
 
 const imageIcon = preload("res://media/icons/image.svg")
 const soundIcon = preload("res://media/icons/sound.svg")
+const noteIcon = preload("res://media/icons/note.svg")
 const unlockedIcon = preload("res://media/icons/unlocked.svg")
 const lockedIcon = preload("res://media/icons/locked.svg")
 const visibleIcon = preload("res://media/icons/visible.svg")
 const hiddenIcon = preload("res://media/icons/hidden.svg")
 
-@export var node:Node:
+@onready var node:Node:
 	set(value):
 		node = value
 		update()
@@ -16,13 +17,16 @@ func _ready() -> void:
 	update()
 
 func update() -> void:
-	match node.get_class():
-		ImageAsset:
+	match node.type:
+		"ImageAsset":
 			%type.texture = imageIcon
-		#AudioAsset:
+		#"AudioAsset":
 			#%type.texture = soundIcon
-	%label.text = node.file.get_file()
-	tooltip_text = node.file.get_file()
+		"NoteAsset":
+			%type.texture = noteIcon
+			%visibility.visible = false
+	%label.text = node.file.get_file().get_basename()
+	tooltip_text = node.file.get_file().get_basename()
 	if node.playerVis:
 		%visibility.icon = visibleIcon
 	elif !node.playerVis:
