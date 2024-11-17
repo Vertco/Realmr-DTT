@@ -6,6 +6,8 @@ signal deleteFile(file:String)
 const soundIcon := preload("res://media/icons/sound.svg")
 const noteIcon := preload("res://media/images/noteImageLarge.svg")
 
+var deleting:bool = false
+
 @export var filePath:String:
 	set(value):
 		filePath = value
@@ -57,8 +59,10 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	modulate = Color(1,1,1)
-	if %deleteButton:
+	if !deleting:
 		%deleteButton.visible = false
 
 func _on_deleteButton_pressed() -> void:
+	deleting = true
 	emit_signal("deleteFile", file)
+	session.newAsset = null
