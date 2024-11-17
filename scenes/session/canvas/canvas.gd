@@ -2,14 +2,14 @@ extends Control
 
 const maxOffset = Vector2(40000, 40000)
 const minOffset = Vector2(-40000, -40000)
+const playerVisVisibleIcon := preload("res://media/icons/playersView.svg")
+const playerVisHiddenIcon := preload("res://media/icons/playersViewHidden.svg")
+const img := preload("res://scenes/session/canvas/items/imageAsset.tscn")
+const note := preload("res://scenes/session/canvas/items/noteAsset.tscn")
 
-@onready var gmWindow: Window = get_window()
-
-var img := preload("res://scenes/session/canvas/items/imageAsset.tscn")
-var note := preload("res://scenes/session/canvas/items/noteAsset.tscn")
-var playerVisVisibleIcon := preload("res://media/icons/playersView.svg")
-var playerVisHiddenIcon := preload("res://media/icons/playersViewHidden.svg")
 var _drag := false
+var initiated:bool = false
+@onready var gmWindow: Window = get_window()
 @export var maxGmZoom := 0.05
 @export var minGmZoom := 4.0
 @export var gmZoomIncrement := 0.05
@@ -29,9 +29,10 @@ func init() -> void:
 	%playersCam.zoom = Vector2(root.settings.playersView_x, root.settings.playersView_y)
 	loadMap()
 	%playersCamControl.on_playersCam_changed()
+	initiated = true
 
 func updateOutliner() -> void:
-	if %canvasAssets:
+	if %canvasAssets and initiated:
 		var children:Array[Node] = %canvasAssets.get_children()
 		session.emit_signal("updateOutliner", children)
 
@@ -65,6 +66,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.pressed:
 			if session.newAsset:
 				session.newAsset = null
+	elif event.is_action_pressed("canvas_save"):
+		session.save()
 	elif event.is_action("cam_zoomIn"):
 		updateGmZoom(gmZoomIncrement)
 	elif event.is_action("cam_zoomOut"):
@@ -89,11 +92,26 @@ func _unhandled_input(event: InputEvent) -> void:
 @warning_ignore("shadowed_variable_base_class")
 func focusGmCam(position:Vector2) -> void:
 	%gmCam.set_offset(lerp(%gmCam.position,position,1))
+	setGmZoom(0.9)
 
-func updateGmZoom(incr) -> void:
+func updateGmZoom(incr:float) -> void:
 	var old_zoom = currentGmZoom
 	var new_incr = incr * currentGmZoom
 	currentGmZoom += new_incr
+	session.gmZoom = currentGmZoom
+	if currentGmZoom < maxGmZoom:
+		currentGmZoom = maxGmZoom
+	elif currentGmZoom > minGmZoom:
+		currentGmZoom = minGmZoom
+	if old_zoom == currentGmZoom:
+		return
+	var newZoom = Vector2(currentGmZoom, currentGmZoom)
+	%playersCamControl.on_playersCam_changed()
+	%gmCam.set_zoom(newZoom)
+
+func setGmZoom(zoom:float) -> void:
+	var old_zoom = currentGmZoom
+	currentGmZoom = zoom
 	session.gmZoom = currentGmZoom
 	if currentGmZoom < maxGmZoom:
 		currentGmZoom = maxGmZoom

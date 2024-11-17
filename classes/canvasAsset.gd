@@ -28,6 +28,7 @@ var initiated:bool = false
 	set(value):
 		locked = value
 		if locked:
+			pass
 			selected = false
 		emit_signal("lock_changed", locked)
 		if initiated:
@@ -54,6 +55,7 @@ var initiated:bool = false
 func _ready() -> void:
 	if playerVis:
 		updateLayer(layer)
+	initiated = true
 
 func updateLayer(l:int) -> void:
 	var children:Array[Node] = get_children()

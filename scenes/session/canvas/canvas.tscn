@@ -36,7 +36,7 @@ corner_radius_bottom_left = 5
 draw_center = false
 border_color = Color(1, 1, 1, 0.75)
 
-[node name="canvasV2" type="Control"]
+[node name="canvas" type="Control"]
 visibility_layer = 1023
 layout_mode = 3
 anchors_preset = 15

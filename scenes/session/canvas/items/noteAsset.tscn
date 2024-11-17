@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://w8vsyinkbr5f"]
+[gd_scene load_steps=20 format=3 uid="uid://w8vsyinkbr5f"]
 
 [ext_resource type="Script" path="res://scenes/session/canvas/items/noteAsset.gd" id="1_4ah2r"]
 [ext_resource type="Texture2D" uid="uid://g0vp1yjcbi22" path="res://media/images/noteImage.svg" id="2_j86jb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_7cdlg"]
 [ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_0ck3w"]
 [ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_w214s"]
+[ext_resource type="Texture2D" uid="uid://cbcawd3kfd4nm" path="res://media/icons/dismiss.svg" id="10_ey2wp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yywv1"]
 bg_color = Color(0.12549, 0.12549, 0.12549, 1)
@@ -17,6 +18,18 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.188235, 0.188235, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18cnm"]
+bg_color = Color(0.376471, 0.376471, 0.376471, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.564706, 0.564706, 0.564706, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -99,7 +112,8 @@ anchors_preset = 0
 mouse_filter = 1
 script = ExtResource("1_4ah2r")
 
-[node name="panel" type="Panel" parent="."]
+[node name="button" type="Panel" parent="."]
+unique_name_in_owner = true
 visibility_layer = 1024
 layout_mode = 1
 anchors_preset = 8
@@ -116,7 +130,26 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yywv1")
 
-[node name="textureRect" type="TextureRect" parent="panel"]
+[node name="buttonSelected" type="Panel" parent="button"]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 1024
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18cnm")
+
+[node name="textureRect" type="TextureRect" parent="button"]
 visibility_layer = 1024
 layout_mode = 1
 anchors_preset = 8
@@ -133,11 +166,11 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_j86jb")
 
-[node name="canvasLayer" type="CanvasLayer" parent="panel"]
+[node name="canvasLayer" type="CanvasLayer" parent="button"]
 layer = 2
 follow_viewport_enabled = true
 
-[node name="popup" type="RichTextLabel" parent="panel/canvasLayer"]
+[node name="popup" type="RichTextLabel" parent="button/canvasLayer"]
 unique_name_in_owner = true
 visible = false
 visibility_layer = 1024
@@ -149,15 +182,17 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -360.0
 offset_top = -360.0
-offset_right = 360.0
-offset_bottom = 360.0
+offset_right = 340.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_ng0no")
 bbcode_enabled = true
 threaded = true
 script = ExtResource("3_yoq7l")
+assume_https_links = false
 h1 = SubResource("Resource_isohq")
 h2 = SubResource("Resource_5h8vo")
 h3 = SubResource("Resource_3kshs")
@@ -165,4 +200,20 @@ h4 = SubResource("Resource_roghx")
 h5 = SubResource("Resource_7ognq")
 h6 = SubResource("Resource_x5bmy")
 
-[connection signal="gui_input" from="panel" to="." method="_on_gui_input"]
+[node name="dismissButton" type="Button" parent="button/canvasLayer/popup"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_bottom = 34.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+icon = ExtResource("10_ey2wp")
+flat = true
+
+[connection signal="gui_input" from="button" to="." method="_on_gui_input"]
+[connection signal="gui_input" from="button/canvasLayer/popup" to="." method="_on_popup_gui_input"]
+[connection signal="meta_clicked" from="button/canvasLayer/popup" to="." method="_on_popup_meta_clicked"]
+[connection signal="pressed" from="button/canvasLayer/popup/dismissButton" to="." method="_on_dismissButton_pressed"]

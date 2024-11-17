@@ -180,7 +180,7 @@ func _on_newFile_gui_input(event: InputEvent) -> void:
 
 func _on_assetContainer_resized() -> void:
 	# Adjust asset grid columns based on container size
-	%assetGrid.columns = clamp(%assetContainer.size.x / 105, 1, 100)
+	%assetGrid.columns = clamp(%assetContainer.size.x / (10+%assetContainer.get_child_count()*100)/%assetContainer.get_child_count(), 2, 100)
 
 func _on_sessionTree_item_selected() -> void:
 	# Update asset list when a tree item is selected

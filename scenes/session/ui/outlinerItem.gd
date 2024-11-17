@@ -24,8 +24,9 @@ func update() -> void:
 			#%type.texture = soundIcon
 		"NoteAsset":
 			%type.texture = noteIcon
-	%label.text = node.file.get_file()
-	tooltip_text = node.file.get_file()
+			%visibility.visible = false
+	%label.text = node.file.get_file().get_basename()
+	tooltip_text = node.file.get_file().get_basename()
 	if node.playerVis:
 		%visibility.icon = visibleIcon
 	elif !node.playerVis:
