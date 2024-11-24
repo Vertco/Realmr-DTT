@@ -23,9 +23,9 @@
 ![Player's desk](https://github.com/user-attachments/assets/fa24da3f-6732-49ca-a508-742b014a1a98 'Allows players to read sheets clearly')
 - [X] Player's view grid scaling
 - [X] Basic image support
+- [X] [Markdown notes](https://github.com/Vertco/realm-renderer/issues/5)
 
 # Planned features:
 - [ ] [Campaign mangement](https://github.com/Vertco/realm-renderer/issues/2)
 - [ ] [Audio support](https://github.com/Vertco/realm-renderer/issues/4)
 - [ ] [Animated images support](https://github.com/Vertco/realm-renderer/issues/3)
-- [ ] [Markdown notes](https://github.com/Vertco/realm-renderer/issues/5)
