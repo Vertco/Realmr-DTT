@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxem1cbw4ev8u"]
+
+[ext_resource type="Script" path="res://scenes/main_menu/maps_folder_new/maps_folder_new.gd" id="1_5638o"]
+[ext_resource type="Texture2D" uid="uid://ddbiaesytauho" path="res://media/icons/folder_LARGE.svg" id="2_gcf1y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkx5v"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0.125)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MapsFolderNew" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(91, 120)
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tkx5v")
+script = ExtResource("1_5638o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_gcf1y")
+expand_mode = 5
+
+[node name="Name" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Name"
+alignment = 1
+context_menu_enabled = false
+
+[connection signal="text_submitted" from="VBoxContainer/Name" to="." method="_on_name_text_submitted"]

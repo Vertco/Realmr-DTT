@@ -1,0 +1,495 @@
+[gd_scene load_steps=20 format=3 uid="uid://dnsgqouj0cu8w"]
+
+[ext_resource type="Script" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
+[ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
+[ext_resource type="Texture2D" uid="uid://duh5yqxh6aqyw" path="res://media/logo/realmr_logo_LARGE.svg" id="2_rc5gi"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_cam_control.gd" id="3_db1i2"]
+[ext_resource type="Texture2D" uid="uid://bfdkrk4w3kv0" path="res://media/images/realmr_background.webp" id="4_os4vs"]
+[ext_resource type="Texture2D" uid="uid://clbm66eft6lwm" path="res://media/icons/dismiss.svg" id="5_85fav"]
+[ext_resource type="Texture2D" uid="uid://djc5tqouae65q" path="res://media/icons/pc_view_hidden.svg" id="5_gtwm6"]
+[ext_resource type="Texture2D" uid="uid://buxxxgxausg31" path="res://media/icons/settings.svg" id="6_prmur"]
+[ext_resource type="Script" path="res://scenes/map_editor/header.gd" id="8_auagr"]
+[ext_resource type="Texture2D" uid="uid://bpph3rurl6oy6" path="res://media/icons/open_external.svg" id="11_5hxim"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_settings.gd" id="11_5yljg"]
+[ext_resource type="Texture2D" uid="uid://2mjbf11q1n8g" path="res://media/icons/reload.svg" id="12_t6fnm"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_view_popup.gd" id="12_uggih"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dw8qu"]
+viewport_path = NodePath("PcWindow")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_salxo"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x73d"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.098, 0.098, 0.098, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqnqr"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.098, 0.098, 0.098, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj15w"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epcgn"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="MapEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kvrwv")
+
+[node name="CanvasLogo" type="TextureRect" parent="."]
+self_modulate = Color(0.1, 0.1, 0.1, 0.12549)
+layout_mode = 0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("2_rc5gi")
+
+[node name="Canvas" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="GmGridRenderer" parent="." instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 262144
+
+[node name="PcWindow" type="Window" parent="."]
+unique_name_in_owner = true
+canvas_cull_mask = 4294705151
+mode = 3
+title = "Players View"
+size = Vector2i(640, 360)
+visible = false
+always_on_top = true
+unfocusable = true
+force_native = true
+
+[node name="Control" type="Control" parent="PcWindow"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PcGridRenderer" parent="PcWindow/Control" instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 524288
+
+[node name="PcCamera" type="Camera2D" parent="PcWindow/Control"]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PcWindow/Control/PcCamera"]
+follow_viewport_enabled = true
+
+[node name="PcOverlay" type="TextureRect" parent="PcWindow/Control/PcCamera/CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_os4vs")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="GmCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+
+[node name="UserInterface" type="CanvasLayer" parent="GmCamera"]
+
+[node name="PcCamControl" type="Control" parent="GmCamera/UserInterface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_db1i2")
+
+[node name="PcPreview" type="TextureRect" parent="GmCamera/UserInterface/PcCamControl"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+offset_left = -108.0
+offset_top = -138.0
+offset_right = 148.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = SubResource("ViewportTexture_dw8qu")
+expand_mode = 3
+
+[node name="Panel" type="Panel" parent="GmCamera/UserInterface/PcCamControl/PcPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_salxo")
+
+[node name="MarginContainer" type="MarginContainer" parent="GmCamera/UserInterface/PcCamControl/PcPreview/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HidePreviewBTN" type="Button" parent="GmCamera/UserInterface/PcCamControl/PcPreview/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close preview"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_85fav")
+
+[node name="PcView" type="Panel" parent="GmCamera/UserInterface/PcCamControl"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3x73d")
+
+[node name="PcCamControlOverlay" type="TextureRect" parent="GmCamera/UserInterface/PcCamControl/PcView"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.501961, 0.501961, 0.501961, 0.25098)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_os4vs")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PcViewHeader" type="PanelContainer" parent="GmCamera/UserInterface/PcCamControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 30)
+layout_mode = 0
+offset_top = -5.0
+offset_right = 256.0
+offset_bottom = 25.0
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqnqr")
+
+[node name="PcViewBTN" type="Button" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Cover"
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_gtwm6")
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Players View"
+vertical_alignment = 1
+
+[node name="PcSettingsBTN" type="Button" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Settings"
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("6_prmur")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GmCamera/UserInterface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Panel" parent="GmCamera/UserInterface/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rj15w")
+script = ExtResource("8_auagr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GmCamera/UserInterface/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="FileMenu" type="MenuButton" parent="GmCamera/UserInterface/VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "File"
+switch_on_hover = true
+
+[node name="PcMenu" type="MenuButton" parent="GmCamera/UserInterface/VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Player's view"
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Open"
+popup/item_0/icon = ExtResource("11_5hxim")
+popup/item_1/text = "Cover"
+popup/item_1/icon = ExtResource("5_gtwm6")
+popup/item_1/id = 1
+popup/item_2/text = "Settings"
+popup/item_2/icon = ExtResource("6_prmur")
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GmCamera/UserInterface/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GmCamera/UserInterface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="GmCamera/UserInterface/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_epcgn")
+
+[node name="PanelContainer2" type="PanelContainer" parent="GmCamera/UserInterface/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_epcgn")
+
+[node name="PcSettings" type="ConfirmationDialog" parent="GmCamera/UserInterface"]
+unique_name_in_owner = true
+title = "Player's view settings"
+initial_position = 2
+size = Vector2i(290, 221)
+unresizable = true
+ok_button_text = "Save"
+script = ExtResource("11_5yljg")
+
+[node name="MarginContainer" type="MarginContainer" parent="GmCamera/UserInterface/PcSettings"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk enabled:"
+
+[node name="PcDeskEnabled" type="CheckButton" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(11, 0)
+layout_mode = 2
+
+[node name="PcDeskSettings" type="VBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk color:"
+
+[node name="PcDeskColor" type="ColorPickerButton" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(94, 31)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+custom_minimum_size = Vector2(11, 0)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk size:"
+
+[node name="PcDeskSize" type="SpinBox" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Width:"
+
+[node name="ResetSizeBTN" type="TextureButton" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+tooltip_text = "Reset size"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_t6fnm")
+stretch_mode = 3
+
+[node name="PcViewWidth" type="SpinBox" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Height:"
+
+[node name="ResetSizeBTN" type="TextureButton" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+tooltip_text = "Reset size"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_t6fnm")
+stretch_mode = 3
+
+[node name="PcViewHeight" type="SpinBox" parent="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="PcViewPopup" type="ConfirmationDialog" parent="GmCamera/UserInterface"]
+unique_name_in_owner = true
+title = "Select display"
+initial_position = 2
+size = Vector2i(450, 300)
+ok_button_text = "Open"
+script = ExtResource("12_uggih")
+
+[node name="DisplaySelector" type="Panel" parent="GmCamera/UserInterface/PcViewPopup"]
+unique_name_in_owner = true
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 445.0
+offset_bottom = 255.0
+
+[connection signal="pc_overlay_visibility_changed" from="." to="GmCamera/UserInterface/PcCamControl" method="_on_pc_overlay_visibility_changed"]
+[connection signal="visibility_changed" from="PcWindow/Control/PcCamera/CanvasLayer/PcOverlay" to="." method="_on_pc_overlay_visibility_changed"]
+[connection signal="pressed" from="GmCamera/UserInterface/PcCamControl/PcPreview/Panel/MarginContainer/HidePreviewBTN" to="GmCamera/UserInterface/PcCamControl" method="_on_hide_preview_btn_pressed"]
+[connection signal="gui_input" from="GmCamera/UserInterface/PcCamControl/PcViewHeader" to="GmCamera/UserInterface/PcCamControl" method="_on_pc_view_header_gui_input"]
+[connection signal="pressed" from="GmCamera/UserInterface/PcCamControl/PcViewHeader/PcViewBTN" to="GmCamera/UserInterface/PcCamControl" method="_on_pc_view_btn_pressed"]
+[connection signal="pressed" from="GmCamera/UserInterface/PcCamControl/PcViewHeader/PcSettingsBTN" to="GmCamera/UserInterface/PcCamControl" method="_on_pc_settings_btn_pressed"]
+[connection signal="about_to_popup" from="GmCamera/UserInterface/VBoxContainer/Header/HBoxContainer/PcMenu" to="GmCamera/UserInterface/VBoxContainer/Header" method="_on_pc_menu_about_to_popup"]
+[connection signal="about_to_popup" from="GmCamera/UserInterface/PcSettings" to="GmCamera/UserInterface/PcSettings" method="_on_about_to_popup"]
+[connection signal="canceled" from="GmCamera/UserInterface/PcSettings" to="GmCamera/UserInterface/PcSettings" method="_on_canceled"]
+[connection signal="confirmed" from="GmCamera/UserInterface/PcSettings" to="GmCamera/UserInterface/PcSettings" method="_on_confirmed"]
+[connection signal="toggled" from="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2/PcDeskEnabled" to="GmCamera/UserInterface/PcSettings" method="_on_pc_desk_enabled_toggled"]
+[connection signal="pressed" from="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4/ResetSizeBTN" to="GmCamera/UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
+[connection signal="pressed" from="GmCamera/UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3/ResetSizeBTN" to="GmCamera/UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
+[connection signal="confirmed" from="GmCamera/UserInterface/PcViewPopup" to="GmCamera/UserInterface/PcViewPopup" method="_on_confirmed"]
+[connection signal="visibility_changed" from="GmCamera/UserInterface/PcViewPopup" to="GmCamera/UserInterface/PcViewPopup" method="_on_visibility_changed"]

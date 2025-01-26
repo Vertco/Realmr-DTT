@@ -10,85 +10,67 @@ config_version=5
 
 [application]
 
-config/name="Realm Renderer"
-config/version="0.4.1"
-run/main_scene="res://scenes/mainMenu/mainMenu.tscn"
-config/use_custom_user_dir=true
-config/custom_user_dir_name="Realm Renderer"
-config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/image="res://media/images/RealmRendererLogo.png"
+config/name="Realmr DTT"
+config/version="0.5.0"
+run/main_scene="res://scenes/main_menu/main_menu.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+run/low_processor_mode=true
+boot_splash/image="res://media/logo/realmr_logo.png"
 boot_splash/fullsize=false
-config/icon="res://media/images/RealmRendererLogo.svg"
+config/icon="res://media/logo/realmr_logo.svg"
 
 [autoload]
 
-root="*res://singletons/root.gd"
-session="*res://singletons/session.gd"
-mainMenu="*res://singletons/mainMenu.gd"
-
-[display]
-
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/subwindows/embed_subwindows=false
-
-[editor]
-
-naming/node_name_casing=1
+Preferences="*res://singletons/preferences.gd"
+App="*res://singletons/app.gd"
 
 [file_customization]
 
 folder_colors={
-"res://classes/": "green",
-"res://media/": "blue",
-"res://scenes/": "purple",
-"res://singletons/": "red"
+"res://classes/": "red",
+"res://media/": "yellow",
+"res://scenes/": "teal",
+"res://singletons/": "purple",
+"res://theme/": "gray"
 }
-
-[global_group]
-
-selected=""
-saveWithSession="All nodes in this group will be saved to the session file and restored on loading the session."
 
 [gui]
 
-theme/custom="res://media/theme.tres"
-theme/default_font_multichannel_signed_distance_field=true
-theme/default_font_generate_mipmaps=true
+theme/custom="res://theme/vertc_theme_desktop.tres"
 
 [input]
 
 cam_drag={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":4,"position":Vector2(107, 16),"global_position":Vector2(116, 62),"factor":1.0,"button_index":3,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":4,"position":Vector2(107, 13),"global_position":Vector2(116, 59),"factor":1.0,"button_index":3,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-cam_zoomIn={
+cam_zoom_in={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(297, 16),"global_position":Vector2(306, 62),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(339, 18),"global_position":Vector2(348, 64),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-cam_zoomOut={
+cam_zoom_out={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(290, 20),"global_position":Vector2(299, 66),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(94, 14),"global_position":Vector2(103, 60),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-canvas_select={
+map_select={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(99, 18),"global_position":Vector2(108, 64),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(57, 15),"global_position":Vector2(66, 61),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-canvas_deselect={
+map_deselect={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(200, 19),"global_position":Vector2(209, 65),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(55, 14),"global_position":Vector2(64, 60),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-canvas_delete={
+map_delete={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194312,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-canvas_save={
+map_save={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
@@ -96,22 +78,10 @@ canvas_save={
 
 [layer_names]
 
-2d_render/layer_1="Players-4"
-2d_render/layer_2="Players-3"
-2d_render/layer_3="Players-2"
-2d_render/layer_4="Players-1"
-2d_render/layer_5="Players0"
-2d_render/layer_6="Players+1"
-2d_render/layer_7="Players+2"
-2d_render/layer_8="Players+3"
-2d_render/layer_9="Players+4"
-2d_render/layer_10="PlayersHidden"
-2d_render/layer_11="GameMaster"
-2d_render/layer_16="PlayersUI"
-2d_render/layer_20="Always visible"
+2d_render/layer_19="Game Master"
+2d_render/layer_20="Players"
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
 environment/defaults/default_clear_color=Color(0.188235, 0.188235, 0.188235, 1)

@@ -1,0 +1,210 @@
+[gd_scene load_steps=12 format=3 uid="uid://bab436qa2vmqh"]
+
+[ext_resource type="Texture2D" uid="uid://bfdkrk4w3kv0" path="res://media/images/realmr_background.webp" id="1_kqv41"]
+[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_rv0rc"]
+[ext_resource type="Texture2D" uid="uid://bebgn5aolj370" path="res://media/icons/delete.svg" id="3_3jatp"]
+[ext_resource type="Texture2D" uid="uid://cyk20770va2xw" path="res://media/logo/realmr_logo.svg" id="3_18s2b"]
+[ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="3_bey83"]
+[ext_resource type="Texture2D" uid="uid://baootdptmdx04" path="res://media/icons/folder_up.svg" id="4_jsxai"]
+[ext_resource type="Texture2D" uid="uid://bd18dpqe6cco8" path="res://media/icons/add.svg" id="4_wqj11"]
+[ext_resource type="Texture2D" uid="uid://doco20b6ejw8f" path="res://media/icons/quit.svg" id="5_j8i0j"]
+[ext_resource type="Script" path="res://scenes/main_menu/maps_container.gd" id="6_whjq6"]
+[ext_resource type="Texture2D" uid="uid://chagemuon0hxg" path="res://media/icons/folder_new.svg" id="7_5dncf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw4ol"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rv0rc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kqv41")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_yw4ol")
+custom_minimum_size = Vector2(640, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"DarkPanel"
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+tooltip_text = "Placeholder Logo"
+texture = ExtResource("3_18s2b")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 69
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"LightPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpLevelBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("4_jsxai")
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkPanel"
+
+[node name="PathLabel" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+text_overrun_behavior = 3
+
+[node name="SelectMapBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("3_bey83")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MapsContainer" type="HFlowContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("6_whjq6")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="DeleteBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Delete selected item"
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Delete"
+icon = ExtResource("3_3jatp")
+
+[node name="OpenBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Open selected item"
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Open"
+icon = ExtResource("3_bey83")
+
+[node name="NewBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Create new map"
+mouse_default_cursor_shape = 2
+text = "New"
+icon = ExtResource("4_wqj11")
+
+[node name="QuitBTN" type="Button" parent="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Quit Realmr VTT"
+mouse_default_cursor_shape = 2
+text = "Quit"
+icon = ExtResource("5_j8i0j")
+
+[node name="VersionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
+[node name="MapsPopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+size = Vector2i(148, 40)
+theme_type_variation = &"DarkPopupMenu"
+item_count = 2
+item_0/text = "Create folder"
+item_0/icon = ExtResource("7_5dncf")
+item_1/text = "Show in file manager"
+item_1/icon = ExtResource("3_bey83")
+item_1/id = 1
+
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/UpLevelBTN" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_up_level_btn_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/SelectMapBTN" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_select_map_btn_pressed"]
+[connection signal="gui_input" from="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_gui_input"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer/DeleteBTN" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_delete_btn_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer/OpenBTN" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_open_btn_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer/NewBTN" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_new_btn_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/PanelContainer2/VBoxContainer/QuitBTN" to="." method="_on_quit_button_pressed"]
+[connection signal="id_pressed" from="MapsPopupMenu" to="Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MapsContainer" method="_on_maps_popup_menu_id_pressed"]
