@@ -67,6 +67,7 @@ func _on_confirmed() -> void:
 	}
 	Preferences.update_preferences(new_prefs)
 	update_pc_zoom(Vector2(Preferences.pc_view_size_x,Preferences.pc_view_size_y))
+	%PcGridRenderer.queue_redraw()
 
 
 func _on_reset_size_btn_pressed() -> void:

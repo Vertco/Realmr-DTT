@@ -1,6 +1,7 @@
 extends Node2D
 
-var cell_size:int = 100  # Size of each cell in the grid
+const cell_size:int = 100
+const grid_alpha:float = 0.25
 
 func _draw():
 	# Get the visible area of the viewport
@@ -39,7 +40,7 @@ func _draw():
 			if dash_size:
 				draw_dashed_line(start_h, end_h, Preferences.grid_color, -1, dash_size)
 			else:
-				draw_line(start_h, end_h, Preferences.grid_color, -1)
+				draw_line(start_h, end_h, Color(Preferences.grid_color.r,Preferences.grid_color.g,Preferences.grid_color.b,grid_alpha), -1)
 		
 		# Draw vertical lines
 		for x in range(start_x, end_x + 1):
@@ -48,4 +49,4 @@ func _draw():
 			if dash_size:
 				draw_dashed_line(start_v, end_v, Preferences.grid_color, -1, dash_size)
 			else:
-				draw_line(start_v, end_v, Preferences.grid_color, -1)
+				draw_line(start_v, end_v, Color(Preferences.grid_color.r,Preferences.grid_color.g,Preferences.grid_color.b,grid_alpha), -1)

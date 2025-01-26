@@ -2,12 +2,14 @@ extends Node
 
 @warning_ignore("unused_signal")
 signal confirmation(result:bool)
+@warning_ignore("unused_signal")
+signal custom
 
 var map_path:String
 var canvas:CanvasLayer
 
 
-func confirm(message:String,title:String="Confirm?") -> void:
+func confirm(message:String,title:String="Confirm?",custom_button:String="",confirm_button:String="Confirm",cancel_button:String="Cancel") -> void:
 	canvas = CanvasLayer.new()
 	
 	# Setup background
@@ -34,7 +36,12 @@ func confirm(message:String,title:String="Confirm?") -> void:
 	dialog.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN
 	
 	# Setup dialog buttons
-	dialog.ok_button_text = "Confirm"
+	dialog.ok_button_text = confirm_button
+	dialog.cancel_button_text = cancel_button
+	if custom_button != "":
+		var custom:Button = dialog.add_button(custom_button)
+		dialog.custom_action.connect(custom_pressed)
+		custom.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	dialog.confirmed.connect(ok_pressed)
 	dialog.canceled.connect(cancel_pressed)
 	dialog.get_ok_button().mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -57,6 +64,10 @@ func ok_pressed() -> void:
 
 func cancel_pressed() -> void:
 	emit_signal("confirmation",false)
+	canvas.queue_free()
+
+func custom_pressed() -> void:
+	emit_signal("custom")
 	canvas.queue_free()
 
 
