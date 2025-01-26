@@ -15,10 +15,12 @@ func _ready() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	get_tree().set_auto_accept_quit(false)
 	get_window().set_canvas_cull_mask_bit(19, false)
+	%GmViewport.world_2d = get_world_2d()
 	%PcWindow.world_2d = get_world_2d()
 	%PcWindow.size_changed.connect(%PcCamControl.update)
 	get_window().size_changed.connect(%PcCamControl.update)
 	%PcCamera.item_rect_changed.connect(%PcCamControl.update)
+	%GmViewport.size_changed.connect(%PcCamControl.update)
 	%PcCamControl.update()
 	if App.map_path:
 		load_map(App.map_path)
@@ -27,7 +29,7 @@ func _ready() -> void:
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		App.confirm("Do you want to quit Realmr?", "Quit Realmr?")
+		App.confirm("Do you want to quit Realmr?", "Quit Realmr?","Save and Quit","Quit","Cancel")
 		var confirm = await App.confirmation
 		if confirm:
 			%PcWindow.size_changed.disconnect(%PcCamControl.update)
