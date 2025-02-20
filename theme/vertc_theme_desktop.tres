@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=40 format=3 uid="uid://dgn4cbnh5mpac"]
+[gd_resource type="Theme" load_steps=41 format=3 uid="uid://dgn4cbnh5mpac"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrcq0"]
 content_margin_left = 5.0
@@ -216,6 +216,8 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5dty"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_atjob"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neem4"]
 content_margin_top = 30.0
 content_margin_bottom = 5.0
@@ -297,5 +299,6 @@ Tree/constants/parent_hl_line_width = 3
 Tree/styles/cursor = SubResource("StyleBoxEmpty_c432n")
 Tree/styles/cursor_unfocused = SubResource("StyleBoxEmpty_3nrw0")
 Tree/styles/focus = SubResource("StyleBoxEmpty_y5dty")
+Tree/styles/panel = SubResource("StyleBoxEmpty_atjob")
 Window/styles/embedded_border = SubResource("StyleBoxFlat_neem4")
 Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_1mo4f")

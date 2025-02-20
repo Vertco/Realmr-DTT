@@ -6,8 +6,8 @@ signal maps_path_changed(path:String)
 const default_preferences:Dictionary = {
 	bg_color = "#333333ff",
 	grid_color= "#00000080",
-	pc_view_size_x = 1.0,
-	pc_view_size_y = 1.0,
+	pc_view_size_x = 0.0,
+	pc_view_size_y = 0.0,
 	pc_desk_enabled = false,
 	pc_desk_size = 0.0,
 	pc_desk_color = "#595959bf"
@@ -28,34 +28,38 @@ var pc_desk_color:Color
 
 func _ready() -> void:
 	# Set default settings if needed
-	var prefs_file:FileAccess
+	var prefs_file: FileAccess
 	if FileAccess.file_exists("user://preferences.json"):
 		prefs_file = FileAccess.open("user://preferences.json", FileAccess.READ)
-		while not prefs_file.eof_reached():
-			var json_string = prefs_file.get_line()
-			
-			# Creates the helper class to interact with JSON
-			var json = JSON.new()
-			
-			# Check if there is any error while parsing the JSON string, skip in case of failure
-			var parse_result = json.parse(json_string)
-			if not parse_result == OK:
-				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-				continue
-			
-			# Get the data from the JSON object
-			for pref in json.get_data().keys():
-				var value = json.get_data()[pref]
-				# Get the property type dynamically
-				var property_info = get_script().get_script_property_list()
-				for property in property_info:
-					if property.name == pref:
-						# Check the type of the property
-						if property.type == 20:
+		
+		# Read the entire file content
+		var json_string = prefs_file.get_as_text()
+		prefs_file.close()
+		
+		# Creates the helper class to interact with JSON
+		var json = JSON.new()
+		
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if parse_result != OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			return
+		
+		# Get the data from the JSON object
+		var data = json.get_data()
+		for pref in data.keys():
+			var value = data[pref]
+			# Get the property type dynamically
+			var property_info = get_script().get_script_property_list()
+			for property in property_info:
+				if property.name == pref:
+					# Check the type of the property
+					match property.type:
+						TYPE_COLOR:
 							set(pref, Color(value))
-						else:
+						_:
 							set(pref, value)
-						break
+					break
 	else:
 		# Save default_preferences as preferences
 		update_preferences(default_preferences)

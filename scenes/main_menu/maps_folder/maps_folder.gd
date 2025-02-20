@@ -24,12 +24,12 @@ var hover:bool = false
 
 func _ready() -> void:
 	var folder = path.get_file()
-	%PopupMenu.id_pressed.connect(show_folder)
+	%PopupMenu.id_pressed.connect(popup_menu)
 	%Name.text = folder
 	tooltip_text = folder
 
 
-func show_folder(id:int) -> void:
+func popup_menu(id:int) -> void:
 	match id:
 		0:
 			emit_signal("show_in_file_manager",path)
@@ -61,14 +61,3 @@ func _on_gui_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			%PopupMenu.position = get_global_mouse_position()
 			%PopupMenu.visible = true
-
-
-func _notification(what):
-	match what:
-		NOTIFICATION_WM_CLOSE_REQUEST:
-			App.confirm("Do you want to quit Realmr?", "Quit Realmr?")
-			var confirm = await App.confirmation
-			if confirm:
-				get_tree().quit()
-			else:
-				pass

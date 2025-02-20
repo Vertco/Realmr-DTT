@@ -78,4 +78,5 @@ func _on_confirmed() -> void:
 		%PcWindow.set_position(global_pos)
 		%PcWindow.visible = true
 		%PcOverlay.visible = true
+		%PcGridRenderer.queue_redraw()
 		%PcCamControl.update()

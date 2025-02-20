@@ -1,14 +1,15 @@
 extends Node2D
 
-const cell_size:int = 100
+var cell_size:int = 100
 const grid_alpha:float = 0.25
+
+@export var camera:Camera2D
 
 func _draw():
 	# Get the visible area of the viewport
-	var camera = get_viewport().get_camera_2d()
 	if camera:
 		# Get the viewport size
-		var viewport_size = get_viewport().get_size()
+		var viewport_size:Vector2 = camera.get_viewport().get_size()
 		
 		# Calculate the visible area based on the camera's position and the viewport size
 		var camera_pos = camera.offset

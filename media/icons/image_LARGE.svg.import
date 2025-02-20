@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfdkrk4w3kv0"
-path="res://.godot/imported/realmr_background.webp-2ef1c694fb0640d24c0625d36269e83d.ctex"
+uid="uid://bp754bpdffe3y"
+path="res://.godot/imported/image_LARGE.svg-499b891d6536575affad685cbf51c67f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/images/realmr_background.webp"
-dest_files=["res://.godot/imported/realmr_background.webp-2ef1c694fb0640d24c0625d36269e83d.ctex"]
+source_file="res://media/icons/image_LARGE.svg"
+dest_files=["res://.godot/imported/image_LARGE.svg-499b891d6536575affad685cbf51c67f.ctex"]
 
 [params]
 
@@ -21,9 +21,9 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
-mipmaps/limit=2
-roughness/mode=1
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

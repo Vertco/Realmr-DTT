@@ -35,7 +35,7 @@ func update(path:String) -> void:
 		folder.delete.connect(delete)
 		add_child(folder)
 	for m in maps:
-		if m.get_extension() == "rmrm":
+		if m.get_extension() == "rmm":
 			var map:Node = map_scene.instantiate()
 			map.path = current_folder+"\\"+m
 			map.pressed.connect(select)
@@ -72,7 +72,7 @@ func delete(path:String) -> void:
 	else:
 		App.confirm("Do you want to delete "+path.get_file()+" including its content?", "Delete folder?")
 	var confirm = await App.confirmation
-	if confirm:
+	if confirm[0]:
 		OS.move_to_trash(path)
 		update(current_folder)
 
@@ -105,10 +105,6 @@ func _on_open_btn_pressed() -> void:
 		open_map(selected)
 	else:
 		update(selected)
-
-
-func _on_new_btn_pressed() -> void:
-	pass # Replace with function body.
 
 
 func _on_gui_input(event: InputEvent) -> void:

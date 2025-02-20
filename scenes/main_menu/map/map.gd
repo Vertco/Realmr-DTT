@@ -26,7 +26,7 @@ var hover:bool = false
 
 func _ready() -> void:
 	var folder = path.get_file()
-	%PopupMenu.id_pressed.connect(show_folder)
+	%PopupMenu.id_pressed.connect(popup_menu)
 	%Name.text = folder
 	tooltip_text = folder
 	# TODO Add image preview
@@ -56,7 +56,7 @@ func _on_mouse_exited() -> void:
 		set_self_modulate(Color(1,1,1,0))
 
 
-func show_folder(id:int) -> void:
+func popup_menu(id:int) -> void:
 	match id:
 		0:
 			emit_signal("show_in_file_manager",path.get_base_dir())

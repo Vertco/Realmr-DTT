@@ -13,6 +13,8 @@ config_version=5
 config/name="Realmr DTT"
 config/version="0.5.0"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Realmr"
 config/features=PackedStringArray("4.3", "Mobile")
 run/low_processor_mode=true
 boot_splash/image="res://media/logo/realmr_logo.png"
@@ -33,6 +35,11 @@ folder_colors={
 "res://singletons/": "purple",
 "res://theme/": "gray"
 }
+
+[global_group]
+
+persist="Nodes that are included in the save file."
+selected="A group with all the currently selected nodes."
 
 [gui]
 
@@ -73,6 +80,16 @@ map_delete={
 map_save={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+map_multi_select={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(151, 14),"global_position":Vector2(160, 60),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+map_option={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(71, 12),"global_position":Vector2(80, 58),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 

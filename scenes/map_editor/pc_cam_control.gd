@@ -12,6 +12,7 @@ const preview_size:Vector2 = Vector2(256,35)
 var dragging:bool
 var offscreen:bool
 var show_preview:bool = true
+var header_mouse_offset:Vector2
 
 func update() -> void:
 	# Calculate scaled size and position
@@ -77,13 +78,21 @@ func get_on_screen_size(node:Node) -> Vector2:
 func _on_pc_view_header_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			dragging = event.pressed
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			if event.pressed:
+				dragging = true
+				header_mouse_offset = %PcViewHeader.get_local_mouse_position()
+			else:
+				dragging = false
+				Input.warp_mouse(%PcViewHeader.position+header_mouse_offset+Vector2(0,30))
 			if event.double_click:
-				%GmCamera.set_offset(%PcCamera.offset)
-				%GmGridRenderer.queue_redraw()
-				update()
+				var tween := get_tree().create_tween()
+				tween.tween_property(%GmCamera,"offset",%PcCamera.offset-Vector2(0,55),0.5).set_trans(Tween.TRANS_CUBIC)
+				tween.tween_callback(%GmGridRenderer.queue_redraw)
+				tween.tween_callback(update)
 	elif event is InputEventMouseMotion:
 		if dragging:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			%PcCamera.set_offset(%PcCamera.offset+(event.relative/%GmCamera.zoom))
 			update()
 			%PcGridRenderer.queue_redraw()
