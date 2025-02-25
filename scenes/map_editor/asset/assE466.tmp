@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://d5eog72qohbw"]
+
+[ext_resource type="Script" path="res://scenes/map_editor/asset/asset.gd" id="1_ggrmj"]
+[ext_resource type="Texture2D" uid="uid://6ms2mt0h33xb" path="res://media/icons/file_LARGE.svg" id="2_iq7co"]
+[ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="3_arwhk"]
+[ext_resource type="Texture2D" uid="uid://bpph3rurl6oy6" path="res://media/icons/open_external.svg" id="4_mllqh"]
+[ext_resource type="Texture2D" uid="uid://bebgn5aolj370" path="res://media/icons/delete.svg" id="4_uhtre"]
+[ext_resource type="Texture2D" uid="uid://rvo0brytf3s2" path="res://media/icons/file_edit.svg" id="5_hufpa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuy3b"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0.125)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Asset" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(91, 120)
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uuy3b")
+script = ExtResource("1_ggrmj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PreviewImage" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(81, 81)
+layout_mode = 2
+texture = ExtResource("2_iq7co")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Asset"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+size = Vector2i(177, 40)
+theme_type_variation = &"DarkPopupMenu"
+item_count = 5
+item_0/text = "Show in file manager"
+item_0/icon = ExtResource("3_arwhk")
+item_1/text = "Open in external program"
+item_1/icon = ExtResource("4_mllqh")
+item_1/id = 1
+item_2/text = "Edit properties"
+item_2/icon = ExtResource("5_hufpa")
+item_2/id = 2
+item_3/id = 3
+item_3/separator = true
+item_4/text = "Delete"
+item_4/icon = ExtResource("4_uhtre")
+item_4/id = 4
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

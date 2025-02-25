@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cif0ni3jmflvt"]
+
+[ext_resource type="Script" path="res://scenes/map_editor/asset_new/asset_new.gd" id="1_jnuf5"]
+[ext_resource type="Texture2D" uid="uid://daavoox7f5rbb" path="res://media/icons/add_LARGE.svg" id="2_i817s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuy3b"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0.125)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="AssetNew" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(91, 120)
+tooltip_text = "Add asset"
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uuy3b")
+script = ExtResource("1_jnuf5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+
+[node name="PreviewImage" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_i817s")
+expand_mode = 5
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Add"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

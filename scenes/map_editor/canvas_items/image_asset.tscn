@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3vfv64vt25vc"]
+
+[ext_resource type="Texture2D" uid="uid://b81w2m22q3op3" path="res://icon.svg" id="1_eyrhe"]
+[ext_resource type="Script" path="res://scenes/map_editor/canvas_items/image_asset.gd" id="2_lrii1"]
+
+[node name="ImageAsset" type="Control" groups=["persist"]]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("2_lrii1")
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visibility_layer = 786432
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_eyrhe")
+
+[connection signal="gui_input" from="Image" to="." method="_on_image_gui_input"]

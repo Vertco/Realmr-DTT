@@ -1,0 +1,738 @@
+[gd_scene load_steps=30 format=3 uid="uid://dnsgqouj0cu8w"]
+
+[ext_resource type="Script" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
+[ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
+[ext_resource type="Texture2D" uid="uid://duh5yqxh6aqyw" path="res://media/logo/realmr_logo_LARGE.svg" id="2_rc5gi"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_cam_control.gd" id="3_db1i2"]
+[ext_resource type="Texture2D" uid="uid://bfdkrk4w3kv0" path="res://media/images/realmr_background.webp" id="4_os4vs"]
+[ext_resource type="Texture2D" uid="uid://clbm66eft6lwm" path="res://media/icons/dismiss.svg" id="5_85fav"]
+[ext_resource type="Texture2D" uid="uid://djc5tqouae65q" path="res://media/icons/pc_view_hidden.svg" id="5_gtwm6"]
+[ext_resource type="Texture2D" uid="uid://buxxxgxausg31" path="res://media/icons/settings.svg" id="6_prmur"]
+[ext_resource type="Script" path="res://scenes/map_editor/header.gd" id="8_auagr"]
+[ext_resource type="Script" path="res://scenes/map_editor/selection_control.gd" id="10_0l723"]
+[ext_resource type="Texture2D" uid="uid://bpph3rurl6oy6" path="res://media/icons/open_external.svg" id="11_5hxim"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_settings.gd" id="11_5yljg"]
+[ext_resource type="Texture2D" uid="uid://bme838l035yws" path="res://media/icons/unlocked.svg" id="11_nh3mi"]
+[ext_resource type="Script" path="res://scenes/map_editor/dock.gd" id="11_xorfq"]
+[ext_resource type="Texture2D" uid="uid://dywavo22bd4vr" path="res://media/icons/move.svg" id="11_yrnyy"]
+[ext_resource type="Texture2D" uid="uid://bkb5bvkic3wn5" path="res://media/icons/visible.svg" id="12_058w6"]
+[ext_resource type="PackedScene" uid="uid://cif0ni3jmflvt" path="res://scenes/map_editor/asset_new/asset_new.tscn" id="12_csb12"]
+[ext_resource type="Texture2D" uid="uid://2mjbf11q1n8g" path="res://media/icons/reload.svg" id="12_t6fnm"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_view_popup.gd" id="12_uggih"]
+[ext_resource type="Texture2D" uid="uid://chagemuon0hxg" path="res://media/icons/folder_new.svg" id="15_0wfo4"]
+[ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="16_4cj1c"]
+[ext_resource type="Script" path="res://scenes/map_editor/outliner.gd" id="18_dhk06"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj15w"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqnqr"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.098, 0.098, 0.098, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dw8qu"]
+viewport_path = NodePath("PcWindow")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_salxo"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x73d"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.098, 0.098, 0.098, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwxj6"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epcgn"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="MapEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kvrwv")
+
+[node name="PcWindow" type="Window" parent="."]
+unique_name_in_owner = true
+canvas_cull_mask = 4294705151
+mode = 3
+title = "Players View"
+size = Vector2i(640, 360)
+visible = false
+always_on_top = true
+unfocusable = true
+force_native = true
+
+[node name="Control" type="Control" parent="PcWindow"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PcCamera" type="Camera2D" parent="PcWindow/Control"]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PcWindow/Control/PcCamera"]
+follow_viewport_enabled = true
+
+[node name="PcOverlay" type="TextureRect" parent="PcWindow/Control/PcCamera/CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_os4vs")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Panel" parent="UserInterface/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_rj15w")
+script = ExtResource("8_auagr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="FileMenu" type="MenuButton" parent="UserInterface/VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "File"
+switch_on_hover = true
+
+[node name="PcMenu" type="MenuButton" parent="UserInterface/VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Player's view"
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Open"
+popup/item_0/icon = ExtResource("11_5hxim")
+popup/item_1/text = "Cover"
+popup/item_1/icon = ExtResource("5_gtwm6")
+popup/item_1/id = 1
+popup/item_2/text = "Settings"
+popup/item_2/icon = ExtResource("6_prmur")
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UserInterface/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PcViewPopup" type="ConfirmationDialog" parent="UserInterface/VBoxContainer/Header"]
+unique_name_in_owner = true
+title = "Select display"
+initial_position = 2
+size = Vector2i(450, 300)
+ok_button_text = "Open"
+script = ExtResource("12_uggih")
+
+[node name="DisplaySelector" type="Panel" parent="UserInterface/VBoxContainer/Header/PcViewPopup"]
+unique_name_in_owner = true
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 445.0
+offset_bottom = 255.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="GmViewport" type="SubViewport" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer"]
+unique_name_in_owner = true
+disable_3d = true
+handle_input_locally = false
+canvas_cull_mask = 4294443007
+size = Vector2i(852, 418)
+render_target_update_mode = 4
+
+[node name="CanvasLogo" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
+self_modulate = Color(0.1, 0.1, 0.1, 0.12549)
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("2_rc5gi")
+
+[node name="Canvas" type="Control" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="PcGridRenderer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport" node_paths=PackedStringArray("camera") instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 524288
+camera = NodePath("../../../../../../../PcWindow/Control/PcCamera")
+
+[node name="GmGridRenderer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport" node_paths=PackedStringArray("camera") instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 262144
+camera = NodePath("../GmCamera")
+
+[node name="GmCamera" type="Camera2D" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera"]
+
+[node name="SelectionControl" type="Control" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_0l723")
+
+[node name="SelectionHeader" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 30)
+layout_mode = 0
+offset_top = -5.0
+offset_right = 128.0
+offset_bottom = 25.0
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqnqr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader"]
+layout_mode = 2
+alignment = 1
+
+[node name="SelectionLock" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("11_nh3mi")
+
+[node name="SelectionVis" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("12_058w6")
+
+[node name="SelectionMove" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 13
+texture = ExtResource("11_yrnyy")
+stretch_mode = 3
+
+[node name="PcCamControl" type="Control" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_db1i2")
+
+[node name="PcPreview" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+offset_left = -108.0
+offset_top = -138.0
+offset_right = 148.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = SubResource("ViewportTexture_dw8qu")
+expand_mode = 3
+
+[node name="Panel" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_salxo")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcPreview/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HidePreviewBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcPreview/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close preview"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_85fav")
+
+[node name="PcView" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 144.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3x73d")
+
+[node name="PcCamControlOverlay" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.502, 0.502, 0.502, 0.35)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_os4vs")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PcViewHeader" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 30)
+layout_mode = 0
+offset_top = -5.0
+offset_right = 256.0
+offset_bottom = 25.0
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqnqr")
+
+[node name="PcViewBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Cover"
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_gtwm6")
+
+[node name="Label" type="Label" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Players View"
+vertical_alignment = 1
+
+[node name="PcSettingsBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader"]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Settings"
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("6_prmur")
+
+[node name="Dock" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwxj6")
+script = ExtResource("11_xorfq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="AssetsTree" type="Tree" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LightPanel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="AssetsContainer" type="HFlowContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
+
+[node name="AssetNew" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" instance=ExtResource("12_csb12")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AssetPropsPopup" type="ConfirmationDialog" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock"]
+unique_name_in_owner = true
+title = "<asset>"
+initial_position = 2
+size = Vector2i(256, 100)
+ok_button_text = "Save"
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 251.0
+offset_bottom = 55.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gridsize:"
+
+[node name="GridSize" type="SpinBox" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+min_value = 10.0
+max_value = 512.0
+step = 0.1
+value = 10.0
+allow_greater = true
+alignment = 1
+suffix = "px"
+select_all_on_focus = true
+
+[node name="Outliner" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_epcgn")
+script = ExtResource("18_dhk06")
+
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/Outliner"]
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="OutlinerContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/Outliner/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PcSettings" type="ConfirmationDialog" parent="UserInterface"]
+unique_name_in_owner = true
+title = "Player's view settings"
+initial_position = 2
+size = Vector2i(290, 221)
+unresizable = true
+ok_button_text = "Save"
+script = ExtResource("11_5yljg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/PcSettings"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/PcSettings/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk enabled:"
+
+[node name="PcDeskEnabled" type="CheckButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(11, 0)
+layout_mode = 2
+
+[node name="PcDeskSettings" type="VBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk color:"
+
+[node name="PcDeskColor" type="ColorPickerButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(94, 31)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
+custom_minimum_size = Vector2(11, 0)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desk size:"
+
+[node name="PcDeskSize" type="SpinBox" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Width:"
+
+[node name="ResetSizeBTN" type="TextureButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+tooltip_text = "Reset size"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_t6fnm")
+stretch_mode = 3
+
+[node name="PcViewWidth" type="SpinBox" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Height:"
+
+[node name="ResetSizeBTN" type="TextureButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+tooltip_text = "Reset size"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_t6fnm")
+stretch_mode = 3
+
+[node name="PcViewHeight" type="SpinBox" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+max_value = 200.0
+step = 0.1
+alignment = 1
+suffix = "cm"
+select_all_on_focus = true
+
+[node name="NewMapPopup" type="ConfirmationDialog" parent="UserInterface"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Create new map"
+initial_position = 2
+size = Vector2i(278, 118)
+ok_button_text = "Create and open"
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/NewMapPopup"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 273.0
+offset_bottom = 73.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/NewMapPopup/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NewMapWarning" type="Label" parent="UserInterface/NewMapPopup/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Map already exists!"
+horizontal_alignment = 1
+
+[node name="NewMapName" type="LineEdit" parent="UserInterface/NewMapPopup/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Map name"
+alignment = 1
+
+[node name="AssetsPopupMenu" type="PopupMenu" parent="UserInterface"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+size = Vector2i(148, 40)
+theme_type_variation = &"DarkPopupMenu"
+item_count = 2
+item_0/text = "Create folder"
+item_0/icon = ExtResource("15_0wfo4")
+item_1/text = "Show in file manager"
+item_1/icon = ExtResource("16_4cj1c")
+item_1/id = 1
+
+[connection signal="pc_overlay_visibility_changed" from="." to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_overlay_visibility_changed"]
+[connection signal="visibility_changed" from="PcWindow/Control/PcCamera/CanvasLayer/PcOverlay" to="." method="_on_pc_overlay_visibility_changed"]
+[connection signal="about_to_popup" from="UserInterface/VBoxContainer/Header/HBoxContainer/PcMenu" to="UserInterface/VBoxContainer/Header" method="_on_pc_menu_about_to_popup"]
+[connection signal="confirmed" from="UserInterface/VBoxContainer/Header/PcViewPopup" to="UserInterface/VBoxContainer/Header/PcViewPopup" method="_on_confirmed"]
+[connection signal="visibility_changed" from="UserInterface/VBoxContainer/Header/PcViewPopup" to="UserInterface/VBoxContainer/Header/PcViewPopup" method="_on_visibility_changed"]
+[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_move_gui_input"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader/HBoxContainer/SelectionLock" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_lock_pressed"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader/HBoxContainer/SelectionVis" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_vis_pressed"]
+[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionMove" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_move_gui_input"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcPreview/Panel/MarginContainer/HidePreviewBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_hide_preview_btn_pressed"]
+[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_view_header_gui_input"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/PcViewBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_view_btn_pressed"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/PcSettingsBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_settings_btn_pressed"]
+[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer/AssetsTree" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_tree_item_selected"]
+[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_container_gui_input"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer/AssetNew" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_asset_new_pressed"]
+[connection signal="about_to_popup" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_about_to_popup"]
+[connection signal="canceled" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_canceled"]
+[connection signal="confirmed" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_confirmed"]
+[connection signal="toggled" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2/PcDeskEnabled" to="UserInterface/PcSettings" method="_on_pc_desk_enabled_toggled"]
+[connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
+[connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
+[connection signal="confirmed" from="UserInterface/NewMapPopup" to="." method="_on_new_map_popup_confirmed"]
+[connection signal="id_pressed" from="UserInterface/AssetsPopupMenu" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_popup_menu_id_pressed"]

@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnsgqouj0cu8w"]
+
+[ext_resource type="Script" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
+[ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
+[ext_resource type="Script" path="res://scenes/map_editor/pc_cam_control.gd" id="3_db1i2"]
+[ext_resource type="Texture2D" uid="uid://b81w2m22q3op3" path="res://icon.svg" id="4_y3aln"]
+[ext_resource type="Texture2D" uid="uid://djc5tqouae65q" path="res://media/icons/players_view_hidden.svg" id="5_gtwm6"]
+[ext_resource type="Texture2D" uid="uid://buxxxgxausg31" path="res://media/icons/settings.svg" id="6_prmur"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x73d"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MapEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kvrwv")
+
+[node name="Canvas" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="TextureRect" type="TextureRect" parent="Canvas"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_y3aln")
+
+[node name="GmGridRenderer" parent="." instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 262144
+
+[node name="PcWindow" type="Window" parent="."]
+unique_name_in_owner = true
+canvas_cull_mask = 4294705151
+initial_position = 3
+size = Vector2i(640, 360)
+current_screen = 0
+visible = false
+
+[node name="Control" type="Control" parent="PcWindow"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PcGridRenderer" parent="PcWindow/Control" instance=ExtResource("2_k5lta")]
+unique_name_in_owner = true
+visibility_layer = 524288
+
+[node name="PcCamera" type="Camera2D" parent="PcWindow/Control"]
+unique_name_in_owner = true
+
+[node name="GmCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+
+[node name="UserInterface" type="CanvasLayer" parent="GmCamera"]
+
+[node name="PcCamControl" type="Control" parent="GmCamera/UserInterface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_db1i2")
+
+[node name="PcViewHeader" type="Panel" parent="GmCamera/UserInterface/PcCamControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 25)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 25.0
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+
+[node name="Button" type="Button" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 24.0
+grow_vertical = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_gtwm6")
+
+[node name="Label" type="Label" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Players View"
+
+[node name="Button2" type="Button" parent="GmCamera/UserInterface/PcCamControl/PcViewHeader"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("6_prmur")
+
+[node name="PcView" type="Panel" parent="GmCamera/UserInterface/PcCamControl"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3x73d")
+
+[connection signal="gui_input" from="GmCamera/UserInterface/PcCamControl/PcViewHeader" to="GmCamera/UserInterface/PcCamControl" method="_on_pc_view_header_gui_input"]

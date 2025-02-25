@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7lnld5sy7fdm"]
+
+[ext_resource type="Script" path="res://scenes/main_menu/maps_folder/maps_folder.gd" id="1_8cb7k"]
+[ext_resource type="Texture2D" uid="uid://ddbiaesytauho" path="res://media/icons/folder_LARGE.svg" id="1_ywdfh"]
+[ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="3_t2v70"]
+[ext_resource type="Texture2D" uid="uid://bebgn5aolj370" path="res://media/icons/delete.svg" id="4_0itmp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkx5v"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0.125)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MapsFolder" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(91, 120)
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tkx5v")
+script = ExtResource("1_8cb7k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ywdfh")
+expand_mode = 5
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Folder"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+size = Vector2i(177, 40)
+theme_type_variation = &"DarkPopupMenu"
+item_count = 2
+item_0/text = "Open in file manager"
+item_0/icon = ExtResource("3_t2v70")
+item_1/text = "Delete"
+item_1/icon = ExtResource("4_0itmp")
+item_1/id = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
