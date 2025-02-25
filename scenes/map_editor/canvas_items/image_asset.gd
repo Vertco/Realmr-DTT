@@ -60,6 +60,12 @@ func select() -> bool:
 	return is_in_group("selected")
 
 
+func deselect() -> bool:
+	if is_in_group("selected"):
+		remove_from_group("selected")
+	return is_in_group("selected")
+
+
 func multi_select() -> bool:
 	if is_in_group("selected"):
 		remove_from_group("selected")

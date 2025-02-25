@@ -1,8 +1,8 @@
 extends Control
 
-const folder_icon := preload("res://media/icons/folder.svg")
-const asset_scene := preload("res://scenes/map_editor/asset/asset.tscn")
-const new_folder := preload("res://scenes/main_menu/maps_folder_new/maps_folder_new.tscn")
+const folder_icon := preload("uid://cpdgyoog23a7i") # folder
+const asset_scene := preload("uid://d5eog72qohbw") # asset
+const new_folder := preload("uid://cxem1cbw4ev8u") # maps_folder_new
 
 var current_dir:String
 var current_asset:String

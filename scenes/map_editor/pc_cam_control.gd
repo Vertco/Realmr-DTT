@@ -107,10 +107,10 @@ func _on_hide_preview_btn_pressed() -> void:
 func _on_pc_view_btn_pressed() -> void:
 	%PcOverlay.visible = !%PcOverlay.visible
 	if %PcOverlay.visible:
-		%PcViewBTN.icon = preload("res://media/icons/pc_view.svg")
+		%PcViewBTN.icon = preload("uid://bu3egx1d0j1ok") # pc_view
 		%PcViewBTN.tooltip_text = "Reveal"
 	else:
-		%PcViewBTN.icon = preload("res://media/icons/pc_view_hidden.svg")
+		%PcViewBTN.icon = preload("uid://djc5tqouae65q") # pc_view_hidden
 		%PcViewBTN.tooltip_text = "Cover"
 
 
@@ -121,6 +121,6 @@ func _on_pc_settings_btn_pressed() -> void:
 func _on_pc_overlay_visibility_changed() -> void:
 	%PcCamControlOverlay.visible = %PcOverlay.visible
 	if %PcOverlay.visible:
-		%PcViewBTN.icon = preload("res://media/icons/pc_view.svg")
+		%PcViewBTN.icon = preload("uid://bu3egx1d0j1ok") # pc_view
 	else:
-		%PcViewBTN.icon = preload("res://media/icons/pc_view_hidden.svg")
+		%PcViewBTN.icon = preload("uid://djc5tqouae65q") # pc_view_hidden

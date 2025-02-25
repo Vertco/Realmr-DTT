@@ -55,7 +55,7 @@ func create_map(map_name:String) -> void:
 		zip.close_file()
 		zip.close()
 		App.map_path = %MapsContainer.current_folder+"/"+map_name+".rmm"
-		get_tree().change_scene_to_file("res://scenes/map_editor/map_editor.tscn")
+		get_tree().change_scene_to_file("uid://dnsgqouj0cu8w") # map_editor
 
 
 func _on_new_btn_pressed() -> void:

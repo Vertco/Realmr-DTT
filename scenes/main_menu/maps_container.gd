@@ -1,8 +1,8 @@
 extends Control
 
-const map_folder_scene:PackedScene = preload("res://scenes/main_menu/maps_folder/maps_folder.tscn")
-const map_scene:PackedScene = preload("res://scenes/main_menu/map/map.tscn")
-const new_folder:PackedScene = preload("res://scenes/main_menu/maps_folder_new/maps_folder_new.tscn")
+const map_folder_scene:PackedScene = preload("uid://c7lnld5sy7fdm") # maps_folder
+const map_scene:PackedScene = preload("uid://cf0vpiiy4qpst") # map
+const new_folder:PackedScene = preload("uid://cxem1cbw4ev8u") # maps_folder_new
 
 @onready var current_folder:String = Preferences.maps_path
 var selected:String
@@ -63,7 +63,7 @@ func select(selected_map:String = "") -> void:
 func open_map(path:String) -> void:
 	if App.is_file(path):
 		App.map_path = path
-		get_tree().change_scene_to_file("res://scenes/map_editor/map_editor.tscn")
+		get_tree().change_scene_to_file("uid://dnsgqouj0cu8w") # map_editor
 
 
 func delete(path:String) -> void:

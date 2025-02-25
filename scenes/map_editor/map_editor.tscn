@@ -362,8 +362,8 @@ icon = ExtResource("5_85fav")
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 256.0
+offset_bottom = 144.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3x73d")
 

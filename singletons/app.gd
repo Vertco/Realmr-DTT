@@ -122,6 +122,7 @@ func cancel_pressed() -> void:
 	emit_signal("confirmation",false,"")
 	canvas.queue_free()
 
+
 func custom_pressed(action:StringName) -> void:
 	emit_signal("confirmation",true,action)
 	canvas.queue_free()

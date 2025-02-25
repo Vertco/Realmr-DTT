@@ -5,7 +5,7 @@ signal pc_overlay_visibility_changed
 @warning_ignore("unused_signal")
 signal load_complete
 
-const image_asset := preload("res://scenes/map_editor/canvas_items/image_asset.tscn")
+const image_asset := preload("uid://d3vfv64vt25vc") # image_asset
 
 @export var max_gm_zoom:float = 0.025
 @export var min_gm_zoom:float = 4.0
@@ -114,6 +114,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		update_gm_zoom(-gm_zoom_incr)
 		%GmGridRenderer.queue_redraw()
 		%PcCamControl.update()
+	elif event.is_action_pressed("map_save"):
+		save_map()
+	elif event.is_action_pressed("map_delete"):
+		var nodes = get_tree().get_nodes_in_group("selected")
+		for node in nodes:
+			node.queue_free()
+		%Outliner.update()
+	elif event.is_action_pressed("ui_cancel"):
+		%Dock.select()
+		App.clear_group("selected")
 	elif event.is_action_released("map_select"):
 		if %Dock.current_asset:
 			var asset := image_asset.instantiate()

@@ -126,7 +126,7 @@ func update_preferences(new_preferences: Dictionary) -> void:
 	# Serialize the current preferences to JSON
 	var json_string = JSON.stringify(current_preferences)
 	
-	# Save the JSON string to res://preferences.json
+	# Save the JSON string to user://preferences.json
 	var file: FileAccess = FileAccess.open("user://preferences.json", FileAccess.WRITE)
 	file.store_line(json_string)
 	file.close()

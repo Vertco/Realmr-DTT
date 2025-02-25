@@ -39,7 +39,7 @@ func load_asset(path: String) -> void:
 		"folder", "import", "preview":
 			return
 		"png", "jpg", "jpeg", "webp":
-			%PreviewImage.texture = preload("res://media/icons/image_LARGE.svg")
+			%PreviewImage.texture = preload("uid://bp754bpdffe3y") # image_LARGE
 			%PopupMenu.set_item_disabled(2,false)
 			%PopupMenu.set_item_icon_modulate(2,Color(1,1,1))
 			set_meta("type", "image")
@@ -47,7 +47,7 @@ func load_asset(path: String) -> void:
 			# Add the image loading task to the thread pool
 			WorkerThreadPool.add_task(_load_image_in_thread.bind(path))
 		"md","txt":
-			%PreviewImage.texture = preload("res://media/icons/note_LARGE.svg")
+			%PreviewImage.texture = preload("uid://fm5oeakptw53") # note_LARGE
 			%PopupMenu.set_item_disabled(2,true)
 			%PopupMenu.set_item_icon_modulate(2,Color(0.337,0.337,0.337))
 		"mp3", "wav":
