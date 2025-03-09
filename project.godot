@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Realmr DTT"
-config/version="0.5.0"
+config/version="0.5.1"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Realmr"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 run/low_processor_mode=true
-boot_splash/image="res://media/logo/realmr_logo.png"
 boot_splash/fullsize=false
+boot_splash/image="res://media/logo/realmr_logo.png"
 config/icon="res://media/logo/realmr_logo.svg"
 
 [autoload]

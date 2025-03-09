@@ -5,6 +5,7 @@ signal confirmation(result:bool,custom:StringName)
 
 var recents:Array
 var map_path:String
+var map_version:Vector3i
 var canvas:CanvasLayer
 var cache_location:String = "user://map_cache"
 
@@ -34,6 +35,22 @@ func _ready() -> void:
 		recents = data
 	else:
 		add_recent()
+
+
+func get_version_vector(version:String) -> Vector3i:
+	# Split the version string by the dot character
+	var version_split:Array = version.split(".")
+	
+	# Ensure we have at least 3 parts, filling with zeros if necessary
+	while version_split.size() < 3:
+		version_split.append("0")
+		
+	# Convert the first three parts to integers
+	var major = int(version_split[0])
+	var minor = int(version_split[1])
+	var patch = int(version_split[2])
+	
+	return Vector3i(major, minor, patch)
 
 
 func add_recent(recent:String="") -> void:
@@ -76,7 +93,7 @@ func confirm(message:String,title:String="Confirm?",custom_button:String="",cust
 	
 	# Setup background shader
 	var shader_mat:ShaderMaterial = ShaderMaterial.new()
-	var shader:Shader = load("res://media/shaders/menuBlur.gdshader")
+	var shader:Shader = load("uid://de33a75xj0d7m") # menuBlur
 	shader_mat.shader = shader
 	shader_mat.set_shader_parameter("blur_amount", 2)
 	shader_mat.set_shader_parameter("mix_amount", 0.5)

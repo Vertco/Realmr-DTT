@@ -1,27 +1,27 @@
 [gd_scene load_steps=30 format=3 uid="uid://dnsgqouj0cu8w"]
 
-[ext_resource type="Script" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
+[ext_resource type="Script" uid="uid://b3w8bf5q864fk" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
 [ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
 [ext_resource type="Texture2D" uid="uid://duh5yqxh6aqyw" path="res://media/logo/realmr_logo_LARGE.svg" id="2_rc5gi"]
-[ext_resource type="Script" path="res://scenes/map_editor/pc_cam_control.gd" id="3_db1i2"]
+[ext_resource type="Script" uid="uid://l1krq15x6sc2" path="res://scenes/map_editor/pc_cam_control.gd" id="3_db1i2"]
 [ext_resource type="Texture2D" uid="uid://bfdkrk4w3kv0" path="res://media/images/realmr_background.webp" id="4_os4vs"]
 [ext_resource type="Texture2D" uid="uid://clbm66eft6lwm" path="res://media/icons/dismiss.svg" id="5_85fav"]
 [ext_resource type="Texture2D" uid="uid://djc5tqouae65q" path="res://media/icons/pc_view_hidden.svg" id="5_gtwm6"]
 [ext_resource type="Texture2D" uid="uid://buxxxgxausg31" path="res://media/icons/settings.svg" id="6_prmur"]
-[ext_resource type="Script" path="res://scenes/map_editor/header.gd" id="8_auagr"]
-[ext_resource type="Script" path="res://scenes/map_editor/selection_control.gd" id="10_0l723"]
+[ext_resource type="Script" uid="uid://b50s335irngcd" path="res://scenes/map_editor/header.gd" id="8_auagr"]
+[ext_resource type="Script" uid="uid://bb70n2f35mj7c" path="res://scenes/map_editor/selection_control.gd" id="10_0l723"]
 [ext_resource type="Texture2D" uid="uid://bpph3rurl6oy6" path="res://media/icons/open_external.svg" id="11_5hxim"]
-[ext_resource type="Script" path="res://scenes/map_editor/pc_settings.gd" id="11_5yljg"]
+[ext_resource type="Script" uid="uid://c6s4clebaoyr3" path="res://scenes/map_editor/pc_settings.gd" id="11_5yljg"]
 [ext_resource type="Texture2D" uid="uid://bme838l035yws" path="res://media/icons/unlocked.svg" id="11_nh3mi"]
-[ext_resource type="Script" path="res://scenes/map_editor/dock.gd" id="11_xorfq"]
+[ext_resource type="Script" uid="uid://45ndnr23eynd" path="res://scenes/map_editor/dock.gd" id="11_xorfq"]
 [ext_resource type="Texture2D" uid="uid://dywavo22bd4vr" path="res://media/icons/move.svg" id="11_yrnyy"]
 [ext_resource type="Texture2D" uid="uid://bkb5bvkic3wn5" path="res://media/icons/visible.svg" id="12_058w6"]
 [ext_resource type="PackedScene" uid="uid://cif0ni3jmflvt" path="res://scenes/map_editor/asset_new/asset_new.tscn" id="12_csb12"]
 [ext_resource type="Texture2D" uid="uid://2mjbf11q1n8g" path="res://media/icons/reload.svg" id="12_t6fnm"]
-[ext_resource type="Script" path="res://scenes/map_editor/pc_view_popup.gd" id="12_uggih"]
+[ext_resource type="Script" uid="uid://cd5xjjqkr0r68" path="res://scenes/map_editor/pc_view_popup.gd" id="12_uggih"]
 [ext_resource type="Texture2D" uid="uid://chagemuon0hxg" path="res://media/icons/folder_new.svg" id="15_0wfo4"]
 [ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="16_4cj1c"]
-[ext_resource type="Script" path="res://scenes/map_editor/outliner.gd" id="18_dhk06"]
+[ext_resource type="Script" uid="uid://d3ktcfxjyqa8b" path="res://scenes/map_editor/outliner.gd" id="18_dhk06"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj15w"]
 bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
@@ -164,6 +164,7 @@ switch_on_hover = true
 item_count = 3
 popup/item_0/text = "Open"
 popup/item_0/icon = ExtResource("11_5hxim")
+popup/item_0/id = 0
 popup/item_1/text = "Cover"
 popup/item_1/icon = ExtResource("5_gtwm6")
 popup/item_1/id = 1
@@ -215,7 +216,7 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 canvas_cull_mask = 4294443007
-size = Vector2i(852, 418)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="CanvasLogo" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
@@ -708,6 +709,7 @@ theme_type_variation = &"DarkPopupMenu"
 item_count = 2
 item_0/text = "Create folder"
 item_0/icon = ExtResource("15_0wfo4")
+item_0/id = 0
 item_1/text = "Show in file manager"
 item_1/icon = ExtResource("16_4cj1c")
 item_1/id = 1
