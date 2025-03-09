@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3vfv64vt25vc"]
 
 [ext_resource type="Texture2D" uid="uid://b81w2m22q3op3" path="res://icon.svg" id="1_eyrhe"]
-[ext_resource type="Script" path="res://scenes/map_editor/canvas_items/image_asset.gd" id="2_lrii1"]
+[ext_resource type="Script" uid="uid://8a2n8e0pm2y7" path="res://scenes/map_editor/canvas_items/image_asset.gd" id="2_lrii1"]
 
 [node name="ImageAsset" type="Control" groups=["persist"]]
 layout_mode = 3

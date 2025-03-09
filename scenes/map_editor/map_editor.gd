@@ -92,7 +92,8 @@ func _notification(what):
 		var confirm = await App.confirmation
 		if confirm[0]:
 			if confirm[1] == "save_and_quit":
-				save_map()
+				if !await save_map():
+					return
 			App.add_recent(App.map_path)
 			get_tree().quit()
 		else:
@@ -157,7 +158,6 @@ func load_map(path:String) -> void:
 	extract_map(path)
 	if FileAccess.file_exists(App.cache_location+"/map.save"):
 		var save_file := FileAccess.open(App.cache_location+"/map.save", FileAccess.READ)
-		var _version
 		var json = JSON.new()
 		var json_string:String = save_file.get_as_text()
 		var parse_result = json.parse(json_string)
@@ -175,7 +175,7 @@ func load_map(path:String) -> void:
 				"pc_position_y":
 					%PcCamera.set_offset(Vector2(%PcCamera.offset.x,json.get_data()[save]))
 				"version":
-					_version = json.get_data()[save]
+					App.map_version = App.get_version_vector(json.get_data()[save])
 				"nodes":
 					var nodes = json.get_data()[save]
 					for nodeData in nodes:
@@ -197,7 +197,7 @@ func load_map(path:String) -> void:
 	%Header.update_recents_menu()
 
 
-func save_map(background:bool=true) -> void:
+func save_map(background:bool=true) -> bool:
 	var map_save:Dictionary = {
 		gm_zoom = %GmCamera.zoom.x,
 		pc_position_x = %PcCamera.offset.x,
@@ -225,6 +225,7 @@ func save_map(background:bool=true) -> void:
 	var task := WorkerThreadPool.add_task(pack_map.bind(App.map_path))
 	if !background:
 		WorkerThreadPool.wait_for_task_completion(task)
+	return true
 
 
 func extract_map(path:String) -> void:

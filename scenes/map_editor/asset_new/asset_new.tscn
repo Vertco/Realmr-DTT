@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cif0ni3jmflvt"]
 
-[ext_resource type="Script" path="res://scenes/map_editor/asset_new/asset_new.gd" id="1_jnuf5"]
+[ext_resource type="Script" uid="uid://cbwd3a78gsoog" path="res://scenes/map_editor/asset_new/asset_new.gd" id="1_jnuf5"]
 [ext_resource type="Texture2D" uid="uid://daavoox7f5rbb" path="res://media/icons/add_LARGE.svg" id="2_i817s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuy3b"]

@@ -32,7 +32,7 @@ var pc_vis:bool = true:
 		else:
 			%Image.set_visibility_layer_bit(19,false)
 			var img_material := ShaderMaterial.new()
-			img_material.shader = preload("res://media/shaders/highlight.gdshader")
+			img_material.shader = preload("uid://y1lj83smdl0q") # highlight
 			%Image.material = img_material
 			modulate = Color(1,1,1,0.2)
 

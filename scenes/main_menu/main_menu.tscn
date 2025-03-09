@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://bab436qa2vmqh"]
 
 [ext_resource type="Texture2D" uid="uid://bfdkrk4w3kv0" path="res://media/images/realmr_background.webp" id="1_kqv41"]
-[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_rv0rc"]
+[ext_resource type="Script" uid="uid://yv3qrwdgwrk8" path="res://scenes/main_menu/main_menu.gd" id="1_rv0rc"]
 [ext_resource type="Texture2D" uid="uid://bebgn5aolj370" path="res://media/icons/delete.svg" id="3_3jatp"]
 [ext_resource type="Texture2D" uid="uid://cyk20770va2xw" path="res://media/logo/realmr_logo.svg" id="3_18s2b"]
 [ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="3_bey83"]
 [ext_resource type="Texture2D" uid="uid://baootdptmdx04" path="res://media/icons/folder_up.svg" id="4_jsxai"]
 [ext_resource type="Texture2D" uid="uid://bd18dpqe6cco8" path="res://media/icons/add.svg" id="4_wqj11"]
 [ext_resource type="Texture2D" uid="uid://doco20b6ejw8f" path="res://media/icons/quit.svg" id="5_j8i0j"]
-[ext_resource type="Script" path="res://scenes/main_menu/maps_container.gd" id="6_whjq6"]
+[ext_resource type="Script" uid="uid://bshit33s6ho8h" path="res://scenes/main_menu/maps_container.gd" id="6_whjq6"]
 [ext_resource type="Texture2D" uid="uid://chagemuon0hxg" path="res://media/icons/folder_new.svg" id="7_5dncf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yw4ol"]
@@ -196,6 +196,7 @@ theme_type_variation = &"DarkPopupMenu"
 item_count = 2
 item_0/text = "Create folder"
 item_0/icon = ExtResource("7_5dncf")
+item_0/id = 0
 item_1/text = "Show in file manager"
 item_1/icon = ExtResource("3_bey83")
 item_1/id = 1
