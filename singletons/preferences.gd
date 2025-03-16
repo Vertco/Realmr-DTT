@@ -9,7 +9,9 @@ const default_preferences:Dictionary = {
 	pc_view_size_x = 0.0,
 	pc_view_size_y = 0.0,
 	pc_desk_enabled = false,
-	pc_desk_size = 0.0,
+	pc_desk_linked = true,
+	pc_desk_size_left = 0.0,
+	pc_desk_size_right = 0.0,
 	pc_desk_color = "#595959bf"
 }
 
@@ -22,7 +24,9 @@ var grid_color:Color
 var pc_view_size_x:float
 var pc_view_size_y:float
 var pc_desk_enabled:bool
-var pc_desk_size:float
+var pc_desk_linked:bool
+var pc_desk_size_left:float
+var pc_desk_size_right:float
 var pc_desk_color:Color
 
 
