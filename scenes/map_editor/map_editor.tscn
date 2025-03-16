@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnsgqouj0cu8w"]
+[gd_scene load_steps=40 format=3 uid="uid://dnsgqouj0cu8w"]
 
 [ext_resource type="Script" uid="uid://b3w8bf5q864fk" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
 [ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
@@ -21,6 +21,10 @@
 [ext_resource type="Script" uid="uid://cd5xjjqkr0r68" path="res://scenes/map_editor/pc_view_popup.gd" id="12_uggih"]
 [ext_resource type="Texture2D" uid="uid://chagemuon0hxg" path="res://media/icons/folder_new.svg" id="15_0wfo4"]
 [ext_resource type="Texture2D" uid="uid://cajquva6x1ags" path="res://media/icons/folder_open.svg" id="16_4cj1c"]
+[ext_resource type="Texture2D" uid="uid://bkd43mol7eyjk" path="res://media/icons/panels.svg" id="16_66pmh"]
+[ext_resource type="Texture2D" uid="uid://cwjoo48cxfep7" path="res://media/icons/hidden.svg" id="16_na5ux"]
+[ext_resource type="Texture2D" uid="uid://v3x0prukfx80" path="res://media/icons/link.svg" id="16_w0tqg"]
+[ext_resource type="Texture2D" uid="uid://bdelkqf8rk1hg" path="res://media/icons/link_disabled.svg" id="17_t8k2j"]
 [ext_resource type="Script" uid="uid://d3ktcfxjyqa8b" path="res://scenes/map_editor/outliner.gd" id="18_dhk06"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj15w"]
@@ -51,17 +55,29 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x73d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0tqg"]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.098, 0.098, 0.098, 0.75)
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 0.74902)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t8k2j"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r3500"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_66pmh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0tqg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3500"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66pmh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwxj6"]
 content_margin_left = 5.0
@@ -109,6 +125,14 @@ unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="PcWindow/Control/PcCamera"]
 follow_viewport_enabled = true
+
+[node name="PcDesk" type="Panel" parent="PcWindow/Control/PcCamera/CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PcOverlay" type="TextureRect" parent="PcWindow/Control/PcCamera/CanvasLayer"]
 unique_name_in_owner = true
@@ -216,7 +240,7 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 canvas_cull_mask = 4294443007
-size = Vector2i(2, 2)
+size = Vector2i(852, 418)
 render_target_update_mode = 4
 
 [node name="CanvasLogo" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
@@ -359,29 +383,128 @@ mouse_default_cursor_shape = 2
 theme_type_variation = &"FlatButton"
 icon = ExtResource("5_85fav")
 
-[node name="PcView" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
+[node name="PcView" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 144.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3x73d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_w0tqg")
+
+[node name="PcViewDesk" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
 
 [node name="PcCamControlOverlay" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
 unique_name_in_owner = true
-visible = false
 self_modulate = Color(0.502, 0.502, 0.502, 0.35)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_os4vs")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="PcDeskControls" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t8k2j")
+
+[node name="HBoxVontainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PcDeskLeft" type="HSlider" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+theme_override_icons/grabber = SubResource("CompressedTexture2D_r3500")
+theme_override_icons/grabber_highlight = SubResource("CompressedTexture2D_66pmh")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_w0tqg")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_r3500")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_66pmh")
+step = 0.1
+
+[node name="PcDeskLeftVis" type="TextureButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer/PcDeskLeft"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+texture_normal = ExtResource("12_058w6")
+texture_pressed = ExtResource("16_na5ux")
+
+[node name="PcDeskRight" type="HSlider" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+theme_override_icons/grabber = SubResource("CompressedTexture2D_r3500")
+theme_override_icons/grabber_highlight = SubResource("CompressedTexture2D_66pmh")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_w0tqg")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_r3500")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_66pmh")
+step = 0.1
+
+[node name="PcDeskRightVis" type="TextureButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer/PcDeskRight"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+texture_normal = ExtResource("12_058w6")
+texture_pressed = ExtResource("16_na5ux")
+
+[node name="PcDeskLinked" type="TextureButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("17_t8k2j")
+texture_pressed = ExtResource("16_w0tqg")
+
+[node name="PcDeskColor" type="ColorPickerButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="PcViewHeader" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl"]
 unique_name_in_owner = true
@@ -409,7 +532,20 @@ size_flags_horizontal = 4
 text = "Players View"
 vertical_alignment = 1
 
-[node name="PcSettingsBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="PcDeskBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Player's Desk"
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("16_66pmh")
+
+[node name="PcSettingsBTN" type="Button" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Settings"
@@ -571,26 +707,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Desk color:"
-
-[node name="PcDeskColor" type="ColorPickerButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(94, 31)
-layout_mode = 2
-size_flags_horizontal = 8
-mouse_default_cursor_shape = 2
-
-[node name="Control" type="Control" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer"]
-custom_minimum_size = Vector2(11, 0)
-layout_mode = 2
-
 [node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
 layout_mode = 2
 alignment = 1
@@ -724,9 +840,12 @@ item_1/id = 1
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionHeader/HBoxContainer/SelectionVis" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_vis_pressed"]
 [connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl/SelectionMove" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/SelectionControl" method="_on_selection_move_gui_input"]
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcPreview/Panel/MarginContainer/HidePreviewBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_hide_preview_btn_pressed"]
+[connection signal="value_changed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer/PcDeskLeft" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_desk_left_value_changed"]
+[connection signal="value_changed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView/PcDeskControls/HBoxVontainer/PcDeskRight" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_desk_right_value_changed"]
 [connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_view_header_gui_input"]
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/PcViewBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_view_btn_pressed"]
-[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/PcSettingsBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_settings_btn_pressed"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer/PcDeskBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_desk_btn_pressed"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer/PcSettingsBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_settings_btn_pressed"]
 [connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer/AssetsTree" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_tree_item_selected"]
 [connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_container_gui_input"]
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer/AssetNew" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_asset_new_pressed"]

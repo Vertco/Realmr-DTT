@@ -13,8 +13,48 @@ var dragging:bool
 var offscreen:bool
 var show_preview:bool = true
 var header_mouse_offset:Vector2
+var pc_desk := Vector2(0,0)
+@onready var pc_view_desk_style := StyleBoxFlat.new()
+@onready var pc_desk_style := StyleBoxFlat.new()
+
+
+func _ready() -> void:
+	# Load preferences
+	pc_desk = Vector2(Preferences.pc_desk_size_left,Preferences.pc_desk_size_right)
+	
+	# Setup Pc View Desk style
+	pc_view_desk_style.draw_center = false
+	pc_view_desk_style.bg_color = Preferences.pc_desk_color
+	pc_view_desk_style.border_width_left = 2
+	pc_view_desk_style.border_width_right = 2
+	pc_view_desk_style.border_color = Preferences.pc_desk_color
+	pc_view_desk_style.corner_radius_top_left = 4
+	pc_view_desk_style.corner_radius_top_right = 4
+	pc_view_desk_style.corner_radius_bottom_left = 4
+	pc_view_desk_style.corner_radius_bottom_right = 4
+	
+	# Setup PC Desk style
+	pc_desk_style.draw_center = false
+	pc_desk_style.bg_color = Preferences.pc_desk_color
+	pc_desk_style.border_color = Preferences.pc_desk_color
+	
+	# Apply styles
+	%PcViewDesk.add_theme_stylebox_override("panel", pc_view_desk_style)
+	%PcDesk.add_theme_stylebox_override("panel", pc_desk_style)
+	
+	# Setup Pc Desk Color
+	%PcDeskColor.color = Preferences.pc_desk_color
+	%PcDeskColor.get_picker().can_add_swatches = false
+	%PcDeskColor.get_picker().presets_visible = false
+	
+	# Update Player's desk
+	update_desk()
+
 
 func update() -> void:
+	# Hide PcDeskControls
+	%PcDeskControls.visible = false
+	
 	# Calculate scaled size and position
 	var pc_size:Vector2 = Vector2(%PcWindow.get_visible_rect().size)
 	var rect_pos:Vector2 = (%PcCamera.get_offset()*%GmCamera.zoom)+((Vector2(%GmViewport.get_size()) / 2) - ((pc_size/%PcCamera.zoom / 2) * %GmCamera.zoom)) - %GmCamera.get_offset() * %GmCamera.zoom
@@ -55,6 +95,9 @@ func update() -> void:
 	
 	# Update scaling
 	%PcSettings.update_pc_zoom(Vector2(Preferences.pc_view_size_x,Preferences.pc_view_size_y))
+	
+	# Update Player's desk
+	update_desk()
 
 
 func get_on_screen_size(node:Node) -> Vector2:
@@ -73,6 +116,59 @@ func get_on_screen_size(node:Node) -> Vector2:
 	
 	# Return the size of the intersection rectangle
 	return intersection.size
+
+
+func update_left_desk_value(percent:float) -> void:
+	pc_desk = Vector2(percent,pc_desk.y)
+	update_desk()
+	Preferences.update_preferences({pc_desk_size_left = percent})
+
+
+func update_right_desk_value(percent:float) -> void:
+	pc_desk = Vector2(pc_desk.x,percent)
+	update_desk()
+	Preferences.update_preferences({pc_desk_size_right = percent})
+
+
+func update_desk_value(percent:float) -> void:
+	update_left_desk_value(percent)
+	update_right_desk_value(percent)
+
+
+func update_desk() -> void:
+	if pc_desk == Vector2(100,100):
+		# Update Pc View Desk style
+		pc_view_desk_style.draw_center = true
+		pc_view_desk_style.border_width_left = 0
+		pc_view_desk_style.border_width_right = 0
+		
+		# Update Pc Desk style
+		pc_desk_style.draw_center = true
+		pc_desk_style.border_width_left = 0
+		pc_desk_style.border_width_right = 0
+	else:
+		# Update Pc View Desk style
+		var view_factor = %PcViewDesk.size.x/200
+		pc_view_desk_style.draw_center = false
+		pc_view_desk_style.border_width_left = view_factor*pc_desk.x
+		pc_view_desk_style.border_width_right = view_factor*pc_desk.y
+		
+		# Update Pc Desk style
+		var factor = %PcDesk.size.x/200
+		pc_desk_style.draw_center = false
+		pc_desk_style.border_width_left = factor*pc_desk.x
+		pc_desk_style.border_width_right = factor*pc_desk.y
+	
+	pc_desk_style.bg_color = Preferences.pc_desk_color
+	pc_desk_style.border_color = Preferences.pc_desk_color
+	pc_view_desk_style.bg_color = Preferences.pc_desk_color
+	pc_view_desk_style.border_color = Preferences.pc_desk_color
+	
+	# Apply updated styles
+	%PcViewDesk.remove_theme_stylebox_override("panel")
+	%PcDesk.remove_theme_stylebox_override("panel")
+	%PcViewDesk.add_theme_stylebox_override("panel", pc_view_desk_style)
+	%PcDesk.add_theme_stylebox_override("panel", pc_desk_style)
 
 
 func _on_pc_view_header_gui_input(event: InputEvent) -> void:
@@ -106,6 +202,7 @@ func _on_hide_preview_btn_pressed() -> void:
 
 func _on_pc_view_btn_pressed() -> void:
 	%PcOverlay.visible = !%PcOverlay.visible
+	%PcDesk.visible = !%PcOverlay.visible
 	if %PcOverlay.visible:
 		%PcViewBTN.icon = preload("uid://bu3egx1d0j1ok") # pc_view
 		%PcViewBTN.tooltip_text = "Reveal"
@@ -118,9 +215,29 @@ func _on_pc_settings_btn_pressed() -> void:
 	%PcSettings.popup_centered()
 
 
+func _on_pc_desk_btn_pressed() -> void:
+	%PcDeskControls.visible = !%PcDeskControls.visible
+	%PcDeskColor.color = Preferences.pc_desk_color
+
+
 func _on_pc_overlay_visibility_changed() -> void:
 	%PcCamControlOverlay.visible = %PcOverlay.visible
-	if %PcOverlay.visible:
-		%PcViewBTN.icon = preload("uid://bu3egx1d0j1ok") # pc_view
+
+
+func _on_pc_desk_left_value_changed(value: float) -> void:
+	if %PcDeskLinked.button_pressed:
+		update_desk_value(value)
 	else:
-		%PcViewBTN.icon = preload("uid://djc5tqouae65q") # pc_view_hidden
+		update_left_desk_value(value)
+
+
+func _on_pc_desk_right_value_changed(value: float) -> void:
+	if %PcDeskLinked.button_pressed:
+		update_desk_value(value*-1+100)
+	else:
+		update_right_desk_value(value*-1+100)
+
+
+func _on_pc_desk_color_color_changed(color: Color) -> void:
+	Preferences.update_preferences({"pc_desk_color": color})
+	update_desk()

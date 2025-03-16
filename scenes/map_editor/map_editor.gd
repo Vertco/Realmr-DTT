@@ -92,7 +92,7 @@ func _notification(what):
 		var confirm = await App.confirmation
 		if confirm[0]:
 			if confirm[1] == "save_and_quit":
-				if !await save_map():
+				if !save_map():
 					return
 			App.add_recent(App.map_path)
 			get_tree().quit()
@@ -107,14 +107,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		gm_cam_drag = true
 	elif event.is_action_released("cam_drag"):
 		gm_cam_drag = false
-	elif event.is_action("cam_zoom_in"):
+	elif event.is_action_pressed("cam_zoom_in"):
 		update_gm_zoom(gm_zoom_incr)
-		%GmGridRenderer.queue_redraw()
-		%PcCamControl.update()
-	elif event.is_action("cam_zoom_out"):
+	elif event.is_action_pressed("cam_zoom_out"):
 		update_gm_zoom(-gm_zoom_incr)
-		%GmGridRenderer.queue_redraw()
-		%PcCamControl.update()
 	elif event.is_action_pressed("map_save"):
 		save_map()
 	elif event.is_action_pressed("map_delete"):
@@ -309,6 +305,8 @@ func update_gm_zoom(incr:float) -> void:
 		return
 	var new_zoom = Vector2(gm_zoom, gm_zoom)
 	%GmCamera.set_zoom(new_zoom)
+	%GmGridRenderer.queue_redraw()
+	%PcCamControl.update()
 
 
 func set_gm_zoom(zoom:float) -> void:
