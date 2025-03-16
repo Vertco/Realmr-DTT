@@ -28,16 +28,9 @@ func update_pc_zoom(pc_size:Vector2) -> void:
 
 func _on_about_to_popup() -> void:
 	pref_backup = {
-		pc_desk_enabled = Preferences.pc_desk_enabled,
-		pc_desk_color = Preferences.pc_desk_color,
-		pc_desk_size = Preferences.pc_desk_size,
 		pc_view_size_x = Preferences.pc_view_size_x,
 		pc_view_size_y = Preferences.pc_view_size_y
 	}
-	%PcDeskEnabled.button_pressed = Preferences.pc_desk_enabled
-	%PcDeskSettings.visible = Preferences.pc_desk_enabled
-	%PcDeskColor.color = Preferences.pc_desk_color
-	%PcDeskSize.value = Preferences.pc_desk_size
 	%PcViewWidth.value = Preferences.pc_view_size_x
 	%PcViewHeight.value = Preferences.pc_view_size_y
 
@@ -59,9 +52,6 @@ func _on_confirmed() -> void:
 	else:
 		pc_view_size = Vector2(%PcViewWidth.value,%PcViewHeight.value)
 	var new_prefs:Dictionary = {
-		pc_desk_enabled = %PcDeskEnabled.button_pressed,
-		pc_desk_color = %PcDeskColor.color,
-		pc_desk_size = %PcDeskSize.value,
 		pc_view_size_x = pc_view_size.x,
 		pc_view_size_y = pc_view_size.y
 	}

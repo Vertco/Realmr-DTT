@@ -392,19 +392,16 @@ offset_bottom = 144.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_w0tqg")
 
+[node name="PcCamControlOverlay" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
 [node name="PcViewDesk" type="Panel" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
-
-[node name="PcCamControlOverlay" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
-unique_name_in_owner = true
-self_modulate = Color(0.502, 0.502, 0.502, 0.35)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_os4vs")
-expand_mode = 3
-stretch_mode = 5
 
 [node name="PcDeskControls" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcView"]
 unique_name_in_owner = true
@@ -662,7 +659,7 @@ layout_mode = 2
 unique_name_in_owner = true
 title = "Player's view settings"
 initial_position = 2
-size = Vector2i(290, 221)
+size = Vector2i(290, 140)
 unresizable = true
 ok_button_text = "Save"
 script = ExtResource("11_5yljg")
@@ -685,47 +682,9 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Desk enabled:"
-
-[node name="PcDeskEnabled" type="CheckButton" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_default_cursor_shape = 2
-
-[node name="Control" type="Control" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(11, 0)
-layout_mode = 2
-
 [node name="PcDeskSettings" type="VBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Desk size:"
-
-[node name="PcDeskSize" type="SpinBox" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer/PcDeskSettings/HBoxContainer5"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 0)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-max_value = 200.0
-step = 0.1
-alignment = 1
-suffix = "cm"
-select_all_on_focus = true
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="UserInterface/PcSettings/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -852,7 +811,6 @@ item_1/id = 1
 [connection signal="about_to_popup" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_about_to_popup"]
 [connection signal="canceled" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_canceled"]
 [connection signal="confirmed" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_confirmed"]
-[connection signal="toggled" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer2/PcDeskEnabled" to="UserInterface/PcSettings" method="_on_pc_desk_enabled_toggled"]
 [connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
 [connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
 [connection signal="confirmed" from="UserInterface/NewMapPopup" to="." method="_on_new_map_popup_confirmed"]
