@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dnsgqouj0cu8w"]
+[gd_scene load_steps=41 format=3 uid="uid://dnsgqouj0cu8w"]
 
 [ext_resource type="Script" uid="uid://b3w8bf5q864fk" path="res://scenes/map_editor/map_editor.gd" id="1_kvrwv"]
 [ext_resource type="PackedScene" uid="uid://bxfpa4f46s4f8" path="res://scenes/map_editor/grid_renderer.tscn" id="2_k5lta"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://v3x0prukfx80" path="res://media/icons/link.svg" id="16_w0tqg"]
 [ext_resource type="Texture2D" uid="uid://bdelkqf8rk1hg" path="res://media/icons/link_disabled.svg" id="17_t8k2j"]
 [ext_resource type="Script" uid="uid://d3ktcfxjyqa8b" path="res://scenes/map_editor/outliner.gd" id="18_dhk06"]
+[ext_resource type="Script" uid="uid://btang884w50pm" path="res://scenes/map_editor/dock_container.gd" id="20_v7ebg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj15w"]
 bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
@@ -240,7 +241,7 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 canvas_cull_mask = 4294443007
-size = Vector2i(852, 418)
+size = Vector2i(852, 391)
 render_target_update_mode = 4
 
 [node name="CanvasLogo" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport"]
@@ -550,7 +551,12 @@ mouse_default_cursor_shape = 2
 theme_type_variation = &"FlatButton"
 icon = ExtResource("6_prmur")
 
-[node name="Dock" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DockContainer" type="TabContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+current_tab = 0
+script = ExtResource("20_v7ebg")
+
+[node name="Assets" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
@@ -559,50 +565,51 @@ size_flags_vertical = 8
 mouse_force_pass_scroll_events = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_lwxj6")
 script = ExtResource("11_xorfq")
+metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_type_variation = &"LightPanel"
 
-[node name="AssetsTree" type="Tree" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer"]
+[node name="AssetsTree" type="Tree" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LightPanel"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer2"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="AssetsContainer" type="HFlowContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer"]
+[node name="AssetsContainer" type="HFlowContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer2/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_force_pass_scroll_events = false
 
-[node name="AssetNew" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" instance=ExtResource("12_csb12")]
+[node name="AssetNew" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" instance=ExtResource("12_csb12")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="AssetPropsPopup" type="ConfirmationDialog" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock"]
+[node name="AssetPropsPopup" type="ConfirmationDialog" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets"]
 unique_name_in_owner = true
 title = "<asset>"
 initial_position = 2
 size = Vector2i(256, 100)
 ok_button_text = "Save"
 
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup"]
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/AssetPropsPopup"]
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 251.0
@@ -612,20 +619,20 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/AssetPropsPopup/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/AssetPropsPopup/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Gridsize:"
 
-[node name="GridSize" type="SpinBox" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="GridSize" type="SpinBox" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/AssetPropsPopup/MarginContainer/VBoxContainer/HBoxContainer5"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
@@ -638,6 +645,32 @@ allow_greater = true
 alignment = 1
 suffix = "px"
 select_all_on_focus = true
+
+[node name="Measure" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Measure"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Measure/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Measure/MarginContainer/PanelContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Measure/MarginContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
 
 [node name="Outliner" type="PanelContainer" parent="UserInterface/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -805,13 +838,13 @@ item_1/id = 1
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/PcViewBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_view_btn_pressed"]
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer/PcDeskBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_desk_btn_pressed"]
 [connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl/PcViewHeader/HBoxContainer/PcSettingsBTN" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_settings_btn_pressed"]
-[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer/AssetsTree" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_tree_item_selected"]
-[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_container_gui_input"]
-[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer/AssetNew" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_asset_new_pressed"]
+[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer/AssetsTree" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets" method="_on_assets_tree_item_selected"]
+[connection signal="gui_input" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets" method="_on_assets_container_gui_input"]
+[connection signal="pressed" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets/HBoxContainer/PanelContainer2/ScrollContainer/AssetsContainer/AssetNew" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets" method="_on_asset_new_pressed"]
 [connection signal="about_to_popup" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_about_to_popup"]
 [connection signal="canceled" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_canceled"]
 [connection signal="confirmed" from="UserInterface/PcSettings" to="UserInterface/PcSettings" method="_on_confirmed"]
 [connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer4/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
 [connection signal="pressed" from="UserInterface/PcSettings/MarginContainer/VBoxContainer/HBoxContainer3/ResetSizeBTN" to="UserInterface/PcSettings" method="_on_reset_size_btn_pressed"]
 [connection signal="confirmed" from="UserInterface/NewMapPopup" to="." method="_on_new_map_popup_confirmed"]
-[connection signal="id_pressed" from="UserInterface/AssetsPopupMenu" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/Dock" method="_on_assets_popup_menu_id_pressed"]
+[connection signal="id_pressed" from="UserInterface/AssetsPopupMenu" to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/DockContainer/Assets" method="_on_assets_popup_menu_id_pressed"]

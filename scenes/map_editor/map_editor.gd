@@ -26,7 +26,7 @@ func _ready() -> void:
 	get_window().size_changed.connect(%PcCamControl.update)
 	%PcCamera.item_rect_changed.connect(%PcCamControl.update)
 	%GmViewport.size_changed.connect(%PcCamControl.update)
-	load_complete.connect(%Dock.update)
+	load_complete.connect(%Assets.update)
 	%PcCamControl.update()
 	if App.map_path:
 		load_map(App.map_path)
@@ -119,12 +119,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			node.queue_free()
 		%Outliner.update()
 	elif event.is_action_pressed("ui_cancel"):
-		%Dock.select()
+		%Assets.select()
 		App.clear_group("selected")
 	elif event.is_action_released("map_select"):
-		if %Dock.current_asset:
+		if %Assets.current_asset:
 			var asset := image_asset.instantiate()
-			asset.update(%Dock.current_asset)
+			asset.update(%Assets.current_asset)
 			%Canvas.add_child(asset)
 			asset.set_position(%Canvas.get_global_mouse_position())
 	elif event is InputEventMouseMotion && gm_cam_drag:

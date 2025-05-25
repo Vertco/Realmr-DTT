@@ -56,6 +56,7 @@ theme_type_variation = &"DarkPopupMenu"
 item_count = 5
 item_0/text = "Show in file manager"
 item_0/icon = ExtResource("3_arwhk")
+item_0/id = 0
 item_1/text = "Open in external program"
 item_1/icon = ExtResource("4_mllqh")
 item_1/id = 1

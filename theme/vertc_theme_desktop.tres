@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=41 format=3 uid="uid://dgn4cbnh5mpac"]
+[gd_resource type="Theme" load_steps=48 format=3 uid="uid://dgn4cbnh5mpac"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrcq0"]
 content_margin_left = 5.0
@@ -210,6 +210,47 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oyqp4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogwug"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8xabp"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_right = 20.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7e7qf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hh57d"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_right = 20.0
+content_margin_bottom = 2.0
+bg_color = Color(0.09, 0.09, 0.09, 0.5)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hs7ev"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_right = 20.0
+content_margin_bottom = 2.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8qya"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_right = 20.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xabp"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+expand_margin_top = 5.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c432n"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3nrw0"]
@@ -292,6 +333,13 @@ SquareButton/styles/hover = SubResource("StyleBoxFlat_4ytbv")
 SquareButton/styles/hover_pressed = SubResource("StyleBoxFlat_uirmx")
 SquareButton/styles/normal = SubResource("StyleBoxFlat_8q2c5")
 SquareButton/styles/pressed = SubResource("StyleBoxFlat_oyqp4")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_ogwug")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxEmpty_8xabp")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_7e7qf")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_hh57d")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_hs7ev")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_j8qya")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_8xabp")
 Tree/colors/children_hl_line_color = Color(0.35, 0.35, 0.35, 1)
 Tree/constants/draw_guides = 0
 Tree/constants/draw_relationship_lines = 1
