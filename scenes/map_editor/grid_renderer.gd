@@ -7,7 +7,7 @@ const grid_alpha:float = 0.25
 
 func _draw():
 	# Get the visible area of the viewport
-	if camera:
+	if camera && Preferences.grid_enabled:
 		# Get the viewport size
 		var viewport_size:Vector2 = camera.get_viewport().get_size()
 		

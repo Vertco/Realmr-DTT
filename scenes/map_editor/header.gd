@@ -1,13 +1,16 @@
 extends Control
 
 var file_popup:PopupMenu
+var edit_popup:PopupMenu
 var pc_popup:PopupMenu
 
 func _ready() -> void:
 	# Connect popup menu id_pressed events
 	file_popup = %FileMenu.get_popup()
+	edit_popup = %EditMenu.get_popup()
 	pc_popup = %PcMenu.get_popup()
 	file_popup.id_pressed.connect(_on_file_menu_id_pressed)
+	edit_popup.id_pressed.connect(_on_edit_menu_id_pressed)
 	pc_popup.id_pressed.connect(_on_pc_menu_id_pressed)
 	
 	# Add FileMenu items
@@ -118,6 +121,12 @@ func _on_file_menu_id_pressed(id:int) -> void:
 				get_tree().quit()
 			else:
 				pass
+
+
+func _on_edit_menu_id_pressed(id:int) -> void:
+	match id:
+		0:
+			%Settings.popup()
 
 
 func _on_pc_menu_id_pressed(id:int) -> void:
