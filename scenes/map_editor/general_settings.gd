@@ -8,6 +8,8 @@ func _ready() -> void:
 	var cancel:Button = get_cancel_button()
 	accept.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	cancel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	%GridColor.get_picker().can_add_swatches = false
+	%GridColor.get_picker().presets_visible = false
 
 
 func _on_about_to_popup() -> void:

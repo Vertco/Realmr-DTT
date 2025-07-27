@@ -841,6 +841,7 @@ text = "Enable grid:"
 [node name="GridEnabled" type="CheckBox" parent="UserInterface/Settings/MarginContainer/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 button_pressed = true
 
 [node name="GridSettings" type="VBoxContainer" parent="UserInterface/Settings/MarginContainer/VBoxContainer"]
@@ -860,6 +861,8 @@ text = "Grid color:"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+edit_alpha = false
 
 [connection signal="pc_overlay_visibility_changed" from="." to="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/SubViewportContainer/GmViewport/GmCamera/CanvasLayer/PcCamControl" method="_on_pc_overlay_visibility_changed"]
 [connection signal="visibility_changed" from="PcWindow/Control/PcCamera/CanvasLayer/PcOverlay" to="." method="_on_pc_overlay_visibility_changed"]
