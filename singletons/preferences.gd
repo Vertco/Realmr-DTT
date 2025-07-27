@@ -6,6 +6,7 @@ signal maps_path_changed(path:String)
 const default_preferences:Dictionary = {
 	bg_color = "#333333ff",
 	grid_color= "#00000080",
+	grid_enabled= true,
 	pc_view_size_x = 0.0,
 	pc_view_size_y = 0.0,
 	pc_desk_enabled = false,
@@ -21,6 +22,7 @@ var maps_path:String:
 		emit_signal("maps_path_changed",maps_path)
 var bg_color:Color
 var grid_color:Color
+var grid_enabled:bool
 var pc_view_size_x:float
 var pc_view_size_y:float
 var pc_desk_enabled:bool
